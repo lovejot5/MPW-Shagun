@@ -1,0 +1,69 @@
+[
+    {
+        "id": 1,
+        "title": "Admissions Open for Session 2025–26",
+        "category": "Administration Office",
+        "date": "2025-02-18",
+        "isNew": true,
+        "author": {
+            "name": "Government Polytechnic College",
+            "icon": "Images/logo.jpeg"
+        },
+        "description": "Applications are invited for Diploma courses for the academic year 2025–26. Interested candidates must apply before the last date as per official guidelines.",
+        "images": [
+            "Images/notices/admission.jpg"
+        ],
+        "buttons": [
+            {
+                "text": "Apply Now",
+                "link": "#"
+            },
+            {
+                "text": "Download Prospectus",
+                "link": "#"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Diploma Examination Schedule Released",
+        "category": "Examination Cell",
+        "date": "2025-02-15",
+        "isNew": true,
+        "author": {
+            "name": "Examination Branch",
+            "icon": "Images/logo.jpeg"
+        },
+        "description": "The examination schedule for all diploma courses has been officially released. Students are advised to check the dates carefully and prepare accordingly.",
+        "images": [
+            "Images/notices/exam.jpg"
+        ],
+        "buttons": [
+            {
+                "text": "View Schedule",
+                "link": "#"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Internship Drive for Final Year Students",
+        "category": "Training & Placement Cell",
+        "date": "2025-02-10",
+        "isNew": false,
+        "author": {
+            "name": "T&P Cell",
+            "icon": "Images/logo.jpeg"
+        },
+        "description": "An internship drive is being organized for final year students in collaboration with industry partners. Eligible students are encouraged to register.",
+        "images": [
+            "Images/notices/internship.jpg"
+        ],
+        "buttons": [
+            {
+                "text": "Register",
+                "link": "#"
+            }
+        ]
+    }
+]
