@@ -1,29 +1,36 @@
 /* ================= MOBILE MENU ================= */
+
 function toggleMenu(btn) {
     const menu = document.getElementById("menu");
     if (!menu) return;
 
     menu.classList.toggle("show");
     btn.classList.toggle("active");
-    btn.blur();
+
+    document.body.style.overflow =
+        menu.classList.contains("show") ? "hidden" : "auto";
 }
 
-/* Close menu on outside click */
 document.addEventListener("click", (e) => {
     const menu = document.getElementById("menu");
     const btn = document.querySelector(".menu-btn");
 
     if (!menu || !btn) return;
 
-    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+    if (
+        menu.classList.contains("show") &&
+        !menu.contains(e.target) &&
+        !btn.contains(e.target)
+    ) {
         menu.classList.remove("show");
         btn.classList.remove("active");
+        document.body.style.overflow = "auto";
     }
 });
 
-/* ================= INFINITE NEWS LOOP ================= */
-document.addEventListener("DOMContentLoaded", () => {
+/* ================= INFINITE NEWS SCROLL ================= */
 
+document.addEventListener("DOMContentLoaded", () => {
     const list = document.getElementById("newsList");
     const container = document.querySelector(".latest-news-container");
 
@@ -33,55 +40,129 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
 
-            /* Render original items */
+            list.innerHTML = "";
+
             data.forEach(item => {
-                list.appendChild(createNewsItem(item));
+                const li = document.createElement("li");
+
+                li.innerHTML = `
+                    <div>
+                        <strong>${item.title}</strong>
+                        ${item.isNew ? '<span class="badge-new">NEW</span>' : ''}
+                    </div>
+                    <div class="news-meta">
+                        ${new Date(item.date).toDateString()}
+                    </div>
+                `;
+
+                list.appendChild(li);
             });
 
-            /* Duplicate items for seamless loop */
-            data.forEach(item => {
-                list.appendChild(createNewsItem(item));
-            });
+            /* Duplicate list for infinite loop */
+            const clone = list.cloneNode(true);
+            list.parentNode.appendChild(clone);
 
-            startInfiniteScroll();
-        });
+            startInfiniteScroll(container);
+        })
+        .catch(err => console.error("News load error:", err));
+});
 
-    function createNewsItem(item) {
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <div>
-                <strong>${item.title}</strong>
-                ${item.isNew ? '<span class="badge-new">NEW</span>' : ''}
-            </div>
-            <div class="news-meta">
-                ${new Date(item.date).toDateString()}
-            </div>
-        `;
-        return li;
-    }
+/* Smooth infinite scroll */
+function startInfiniteScroll(container) {
 
-    function startInfiniteScroll() {
-        let scrollSpeed = 0.5;
-        let isPaused = false;
+    let speed = 0.5; // smooth speed
+    let paused = false;
 
-        function step() {
-            if (!isPaused) {
-                container.scrollTop += scrollSpeed;
+    function step() {
+        if (!paused) {
+            container.scrollTop += speed;
 
-                /* When half reached, reset smoothly */
-                if (container.scrollTop >= container.scrollHeight / 2) {
-                    container.scrollTop = 0;
-                }
+            if (container.scrollTop >= container.scrollHeight / 2) {
+                container.scrollTop = 0;
             }
-            requestAnimationFrame(step);
         }
-
-        /* Pause on interaction */
-        container.addEventListener("mouseenter", () => isPaused = true);
-        container.addEventListener("mouseleave", () => isPaused = false);
-        container.addEventListener("touchstart", () => isPaused = true);
-        container.addEventListener("touchend", () => isPaused = false);
-
         requestAnimationFrame(step);
     }
+
+    requestAnimationFrame(step);
+
+    /* Manual interaction pause */
+    container.addEventListener("mouseenter", () => paused = true);
+    container.addEventListener("mouseleave", () => paused = false);
+
+    container.addEventListener("touchstart", () => paused = true);
+    container.addEventListener("touchend", () => paused = false);
+}
+
+/* ================= NOTICES RENDER ================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("noticeContainer");
+    if (!container) return;
+
+    fetch("data/notices.json")
+        .then(res => res.json())
+        .then(data => {
+
+            data.forEach(notice => {
+
+                const div = document.createElement("div");
+                div.className = "principal-card";
+                div.style.marginBottom = "40px";
+
+                div.innerHTML = `
+                    <div class="principal-header">
+                        <img src="${notice.author.icon}" alt="Author">
+                        <div>
+                            <h3>${notice.title}</h3>
+                            <span>${notice.author.name}</span>
+                            <small style="display:block;color:#777">
+                                ${new Date(notice.date).toDateString()}
+                            </small>
+                        </div>
+                    </div>
+
+                    <p style="margin:20px 0;">
+                        ${notice.description}
+                    </p>
+
+                    ${
+                        notice.images && notice.images.length > 0
+                        ? `
+                        <div style="margin-bottom:20px;">
+                            ${notice.images.map(img =>
+                                `<img src="${img}" style="width:100%;border-radius:16px;margin-bottom:10px;">`
+                            ).join("")}
+                        </div>
+                        `
+                        : ""
+                    }
+
+                    ${
+                        notice.buttons && notice.buttons.length > 0
+                        ? `
+                        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                            ${notice.buttons.map(btn =>
+                                `<a href="${btn.link}" target="_blank"
+                                    style="
+                                        padding:10px 16px;
+                                        border-radius:12px;
+                                        background:var(--accent-soft);
+                                        color:var(--accent);
+                                        font-weight:600;
+                                        box-shadow:0 4px 12px rgba(0,0,0,.1);
+                                        transition:.3s;">
+                                    ${btn.text}
+                                </a>`
+                            ).join("")}
+                        </div>
+                        `
+                        : ""
+                    }
+                `;
+
+                container.appendChild(div);
+            });
+        })
+        .catch(err => console.error("Notice load error:", err));
 });
