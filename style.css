@@ -1,8 +1,8 @@
 /* ================= ROOT THEME ================= */
 :root {
     --bg-main: #f6efe6;
-    --bg-card: #ffffff;
     --bg-header: #efe3d3;
+    --bg-card: #ffffff;
 
     --accent: #7b4b1f;
     --accent-soft: #f1e6d6;
@@ -16,7 +16,7 @@
     --border-soft: #e5d8c8;
 
     --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
-    --shadow-card: 0 20px 40px rgba(0,0,0,0.12);
+    --shadow-card: 0 25px 60px rgba(0,0,0,0.15);
 }
 
 /* ================= RESET ================= */
@@ -47,14 +47,14 @@ a {
 /* ================= HEADER ================= */
 header {
     background: var(--bg-header);
-    padding: 14px 24px;
+    padding: 16px 28px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 999;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
 /* Logo */
@@ -65,8 +65,8 @@ header {
 }
 
 .logo img {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: #fff;
     padding: 4px;
@@ -87,30 +87,39 @@ header {
 header ul {
     list-style: none;
     display: flex;
-    gap: 10px;
+    gap: 26px;
 }
 
 .nav-link {
-    padding: 10px 18px;
-    border-radius: 14px;
+    position: relative;
+    padding: 8px 0;
     font-weight: 500;
-    transition: all .3s ease;
+    transition: color .3s ease;
 }
 
 .nav-link:hover {
-    background: rgba(0,0,0,.06);
+    color: var(--accent);
 }
 
 .nav-link.active {
-    background: var(--accent-soft);
     color: var(--accent);
-    box-shadow: 0 4px 12px rgba(123,75,31,.25);
+}
+
+.nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 4px;
 }
 
 /* ================= MOBILE MENU ================= */
 .menu-btn {
     display: none;
-    width: 26px;
+    width: 28px;
     height: 20px;
     position: relative;
     cursor: pointer;
@@ -143,8 +152,11 @@ header ul {
 /* ================= HERO ================= */
 .hero {
     position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 90px 20px;
-    text-align: center;
     background: url("Images/logo.jpeg") center/cover no-repeat;
 }
 
@@ -152,43 +164,48 @@ header ul {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,0.5);
 }
 
 .hero-content {
     position: relative;
     max-width: 900px;
-    margin: auto;
+    width: 100%;
     background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(20px);
-    padding: 40px;
-    border-radius: 30px;
-    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    padding: 50px;
+    border-radius: 35px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.4);
     color: #fff;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.25);
 }
 
 .hero h1 {
-    font-size: 34px;
-    margin-bottom: 18px;
+    font-size: 36px;
+    margin-bottom: 22px;
 }
 
 .hero-description {
-    line-height: 1.8;
     font-size: 15px;
+    line-height: 1.8;
 }
 
-/* ================= SECTION SPACING ================= */
-.section {
-    max-width: 1100px;
-    margin: 60px auto;
+/* ================= UNIFORM CONTAINER WIDTH ================= */
+.section,
+.latest-news-wrapper,
+.principal-card {
+    max-width: 950px;
+    margin: 70px auto;
     padding: 0 20px;
 }
 
 /* ================= PRINCIPAL CARD ================= */
 .principal-card {
     background: var(--bg-card);
-    border-radius: 30px;
-    padding: 40px;
+    padding: 45px;
+    border-radius: 35px;
     box-shadow: var(--shadow-card);
     border: 1px solid var(--border-soft);
     text-align: center;
@@ -198,13 +215,13 @@ header ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
+    gap: 18px;
+    margin-bottom: 25px;
 }
 
 .principal-header img {
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
 }
 
@@ -216,80 +233,92 @@ header ul {
 /* ================= NEWS ================= */
 .latest-news-wrapper {
     background: var(--bg-card);
-    border-radius: 30px;
-    padding: 30px;
+    padding: 40px;
+    border-radius: 35px;
     box-shadow: var(--shadow-card);
 }
 
 .latest-news-title {
     text-align: center;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .latest-news-container {
-    max-height: 250px;
+    max-height: 260px;
     overflow-y: auto;
     scroll-behavior: smooth;
 }
 
 .latest-news-list li {
-    padding: 14px 0;
+    padding: 16px 0;
     border-bottom: 1px solid #eee;
+}
+
+.news-meta {
+    font-size: 13px;
+    color: var(--text-light);
 }
 
 .badge-new {
     background: var(--accent);
     color: #fff;
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 8px;
-    margin-left: 6px;
-    box-shadow: 0 0 10px rgba(123,75,31,.6);
+    font-size: 11px;
+    padding: 4px 9px;
+    border-radius: 10px;
+    margin-left: 8px;
+    box-shadow: 0 0 12px rgba(123,75,31,.7);
 }
 
 /* ================= STUDENT CORNER ================= */
 .student-corner {
-    background: var(--bg-card);
-    border-radius: 30px;
-    padding: 40px;
-    box-shadow: var(--shadow-card);
     text-align: center;
+    margin: 80px auto;
+}
+
+.student-corner h2 {
+    margin-bottom: 25px;
 }
 
 .cards {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 350px;
-    margin: 30px auto 0;
+    gap: 20px;
+    max-width: 400px;
+    margin: auto;
 }
 
 .card {
-    padding: 16px;
-    border-radius: 16px;
-    border: 1px solid var(--border-soft);
+    padding: 20px;
+    border-radius: 20px;
     background: #fff;
+    border: 1px solid var(--border-soft);
     box-shadow: var(--shadow-soft);
+    transition: .3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
 }
 
 /* ================= FOOTER ================= */
 .site-footer {
     background: var(--dark-bg);
     color: var(--text-muted);
-    margin-top: auto;
-    padding-top: 50px;
+    padding-top: 70px;
+    margin-top: 90px;
 }
 
 .footer-top {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 .footer-top img {
-    width: 60px;
+    width: 70px;
     border-radius: 50%;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .footer-top h3 {
@@ -300,26 +329,33 @@ header ul {
     max-width: 1200px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 40px;
-    padding: 0 30px 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    padding: 0 40px 60px;
 }
 
 .footer-container h4 {
     color: #fff;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
+}
+
+.footer-container a,
+.footer-container p {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .footer-map iframe {
     width: 100%;
-    height: 160px;
-    border-radius: 14px;
+    height: 180px;
+    border-radius: 18px;
     border: none;
 }
 
 .footer-bottom {
     text-align: center;
-    padding: 20px;
+    padding: 25px;
     border-top: 1px solid rgba(255,255,255,.08);
     font-size: 13px;
 }
@@ -335,20 +371,14 @@ header ul {
         height: 100vh;
         background: #fff;
         flex-direction: column;
-        padding: 80px 25px;
-        gap: 18px;
-        box-shadow: -10px 0 40px rgba(0,0,0,.2);
+        padding: 100px 30px;
+        gap: 30px;
+        box-shadow: -15px 0 40px rgba(0,0,0,.25);
         transition: .4s ease;
     }
 
     header ul.show {
         right: 0;
-    }
-
-    .nav-link {
-        width: 100%;
-        padding: 14px;
-        border-radius: 14px;
     }
 
     .menu-btn {
@@ -357,13 +387,18 @@ header ul {
 
     .footer-container {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .hero {
-        padding: 70px 15px;
+        gap: 40px;
     }
 
     .hero-content {
-        padding: 25px;
+        padding: 30px;
+    }
+
+    .principal-card {
+        padding: 30px;
+    }
+
+    .latest-news-wrapper {
+        padding: 30px;
     }
 }
