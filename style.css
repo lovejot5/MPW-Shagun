@@ -1,12 +1,10 @@
-/* ================= ROOT THEME ================= */
+/* ================= ROOT ================= */
 :root {
     --bg-main: #f6efe6;
     --bg-header: #efe3d3;
     --bg-card: #ffffff;
 
     --accent: #7b4b1f;
-    --accent-soft: #f1e6d6;
-
     --dark-bg: #0c1116;
 
     --text-dark: #2c2c2c;
@@ -15,7 +13,7 @@
 
     --border-soft: #e5d8c8;
 
-    --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+    --shadow-soft: 0 8px 25px rgba(0,0,0,0.08);
     --shadow-card: 0 25px 60px rgba(0,0,0,0.15);
 }
 
@@ -24,40 +22,30 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
 }
 
 html, body {
-    height: 100%;
     scroll-behavior: smooth;
 }
 
 body {
     background: var(--bg-main);
     color: var(--text-dark);
-    display: flex;
-    flex-direction: column;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
 }
 
 /* ================= HEADER ================= */
 header {
     background: var(--bg-header);
-    padding: 16px 28px;
+    padding: 16px 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
-    z-index: 999;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
 }
 
-/* Logo */
 .logo {
     display: flex;
     align-items: center;
@@ -70,7 +58,6 @@ header {
     border-radius: 50%;
     background: #fff;
     padding: 4px;
-    border: 1px solid var(--border-soft);
 }
 
 .logo h2 {
@@ -83,18 +70,18 @@ header {
     color: var(--text-light);
 }
 
-/* ================= NAV DESKTOP ================= */
+/* NAV */
 header ul {
     list-style: none;
     display: flex;
-    gap: 26px;
+    gap: 28px;
 }
 
 .nav-link {
     position: relative;
-    padding: 8px 0;
+    padding: 6px 0;
     font-weight: 500;
-    transition: color .3s ease;
+    transition: .3s;
 }
 
 .nav-link:hover {
@@ -108,63 +95,29 @@ header ul {
 .nav-link.active::after {
     content: "";
     position: absolute;
-    left: 0;
     bottom: -6px;
+    left: 0;
     width: 100%;
     height: 2px;
     background: var(--accent);
-    border-radius: 4px;
-}
-
-/* ================= MOBILE MENU ================= */
-.menu-btn {
-    display: none;
-    width: 28px;
-    height: 20px;
-    position: relative;
-    cursor: pointer;
-}
-
-.menu-btn span {
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background: var(--text-dark);
-    transition: .3s ease;
-}
-
-.menu-btn span:nth-child(1){ top:0 }
-.menu-btn span:nth-child(2){ top:9px }
-.menu-btn span:nth-child(3){ top:18px }
-
-.menu-btn.active span:nth-child(1){
-    transform: rotate(45deg);
-    top:9px;
-}
-.menu-btn.active span:nth-child(2){
-    opacity:0;
-}
-.menu-btn.active span:nth-child(3){
-    transform: rotate(-45deg);
-    top:9px;
 }
 
 /* ================= HERO ================= */
 .hero {
     position: relative;
-    min-height: 70vh;
+    min-height: 75vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 90px 20px;
-    background: url("Images/logo.jpeg") center/cover no-repeat;
+    padding: 80px 20px;
+    background: url("Images/logo.jpeg") center center/cover no-repeat;
 }
 
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.55);
 }
 
 .hero-content {
@@ -172,19 +125,18 @@ header ul {
     max-width: 900px;
     width: 100%;
     background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    padding: 50px;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    padding: 55px;
     border-radius: 35px;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.4);
-    color: #fff;
     text-align: center;
-    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    box-shadow: 0 40px 90px rgba(0,0,0,0.45);
 }
 
 .hero h1 {
-    font-size: 36px;
-    margin-bottom: 22px;
+    font-size: 34px;
+    margin-bottom: 20px;
 }
 
 .hero-description {
@@ -192,62 +144,31 @@ header ul {
     line-height: 1.8;
 }
 
-/* ================= UNIFORM CONTAINER WIDTH ================= */
-.section,
-.latest-news-wrapper,
-.principal-card {
-    max-width: 950px;
-    margin: 70px auto;
-    padding: 0 20px;
+/* ================= GLOBAL SECTION WIDTH ================= */
+.section {
+    max-width: 1100px;
+    margin: 90px auto;
+    padding: 0 25px;
 }
 
-/* ================= PRINCIPAL CARD ================= */
-.principal-card {
+/* ================= CARDS (Principal + Notices + News) ================= */
+.card-box {
     background: var(--bg-card);
-    padding: 45px;
+    padding: 50px;
     border-radius: 35px;
     box-shadow: var(--shadow-card);
     border: 1px solid var(--border-soft);
-    text-align: center;
 }
 
-.principal-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 25px;
-}
-
-.principal-header img {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-}
-
-.principal-header span {
-    color: var(--accent);
-    font-weight: 600;
-}
-
-/* ================= NEWS ================= */
+/* ================= LATEST NEWS ================= */
 .latest-news-wrapper {
-    background: var(--bg-card);
-    padding: 40px;
-    border-radius: 35px;
-    box-shadow: var(--shadow-card);
-}
-
-.latest-news-title {
-    text-align: center;
-    font-weight: 600;
-    margin-bottom: 25px;
+    max-width: 700px;
+    margin: 70px auto;
 }
 
 .latest-news-container {
     max-height: 260px;
     overflow-y: auto;
-    scroll-behavior: smooth;
 }
 
 .latest-news-list li {
@@ -255,59 +176,47 @@ header ul {
     border-bottom: 1px solid #eee;
 }
 
-.news-meta {
-    font-size: 13px;
-    color: var(--text-light);
-}
-
 .badge-new {
     background: var(--accent);
     color: #fff;
+    padding: 4px 10px;
+    border-radius: 12px;
     font-size: 11px;
-    padding: 4px 9px;
-    border-radius: 10px;
-    margin-left: 8px;
-    box-shadow: 0 0 12px rgba(123,75,31,.7);
+    box-shadow: 0 0 15px rgba(123,75,31,.7);
 }
 
 /* ================= STUDENT CORNER ================= */
 .student-corner {
     text-align: center;
-    margin: 80px auto;
-}
-
-.student-corner h2 {
-    margin-bottom: 25px;
+    margin: 100px auto;
 }
 
 .cards {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
     max-width: 400px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
 }
 
 .card {
     padding: 20px;
-    border-radius: 20px;
     background: #fff;
-    border: 1px solid var(--border-soft);
+    border-radius: 22px;
     box-shadow: var(--shadow-soft);
-    transition: .3s ease;
+    transition: .3s;
 }
 
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+    transform: translateY(-5px);
 }
 
 /* ================= FOOTER ================= */
 .site-footer {
     background: var(--dark-bg);
     color: var(--text-muted);
+    margin-top: 120px;
     padding-top: 70px;
-    margin-top: 90px;
 }
 
 .footer-top {
@@ -318,7 +227,7 @@ header ul {
 .footer-top img {
     width: 70px;
     border-radius: 50%;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .footer-top h3 {
@@ -329,7 +238,7 @@ header ul {
     max-width: 1200px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4,1fr);
     gap: 60px;
     padding: 0 40px 60px;
 }
@@ -348,7 +257,7 @@ header ul {
 
 .footer-map iframe {
     width: 100%;
-    height: 180px;
+    height: 170px;
     border-radius: 18px;
     border: none;
 }
@@ -372,9 +281,9 @@ header ul {
         background: #fff;
         flex-direction: column;
         padding: 100px 30px;
-        gap: 30px;
+        gap: 25px;
+        transition: .4s;
         box-shadow: -15px 0 40px rgba(0,0,0,.25);
-        transition: .4s ease;
     }
 
     header ul.show {
@@ -387,18 +296,13 @@ header ul {
 
     .footer-container {
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
     }
 
     .hero-content {
-        padding: 30px;
+        padding: 35px;
     }
 
-    .principal-card {
-        padding: 30px;
-    }
-
-    .latest-news-wrapper {
+    .card-box {
         padding: 30px;
     }
 }
