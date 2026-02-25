@@ -738,22 +738,23 @@ section {
     line-height: 1.4;
 }
 
-/* ===== Locate Us ===== */
+/* ===== Locate Us Clean Version ===== */
 
 .footer-map {
-    background: #e5e5e5;
-    padding: 10px;
+    padding: 0;
+    background: transparent;
 }
 
 .footer-map h4 {
-    color: #222;
-    margin-bottom: 6px;
+    color: #ffffff;
+    margin-bottom: 8px;
 }
 
 .footer-map iframe {
     width: 100%;
-    height: 130px;
+    height: 140px;
     border: none;
+    border-radius: 6px;
 }
 
 /* ===== Bottom ===== */
@@ -767,24 +768,19 @@ section {
     opacity: 0.6;
 }
 
-/* ================= MOBILE ================= */
-
 @media (max-width: 900px) {
-
-    /* 3 columns grid */
     .footer-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 18px;
     }
 
-    /* Locate Us full width */
     .footer-map {
         grid-column: span 3;
         margin-top: 15px;
     }
 
     .footer-map iframe {
-        height: 150px;
+        height: 160px;
     }
 }
 /* ========================= ANIMATIONS ========================== */
