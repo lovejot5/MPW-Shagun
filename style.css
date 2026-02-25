@@ -287,7 +287,7 @@ body.menu-open .page-content {
     cursor: pointer;
     width: 28px;
     height: 24px;
-    z-index: 1102;
+    z-index: 1300;
 }
 
 .menu-btn span {
