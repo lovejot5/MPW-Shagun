@@ -126,6 +126,9 @@ header {
 
 header.scrolled {
     box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(216, 203, 184, 0.85);
 }
 
 /* LOGO AREA */
@@ -419,9 +422,7 @@ section {
     max-width: 1200px;
     margin: auto;
 }
-section:not(:first-child) {
-    margin-top: 40px;
-}
+
 .container-large {
     max-width: 1100px;
     margin: auto;
@@ -456,10 +457,14 @@ section:not(:first-child) {
 /* ========================= CARD SYSTEM ========================== */
 
 .card {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     padding: 30px;
     border-radius: var(--radius-md);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+    transition: 0.4s ease;
 }
 
 .card:hover {
@@ -657,6 +662,7 @@ margin-left: 6px;
     border-radius: var(--radius-sm);
     border: none;
     cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .btn-primary {
@@ -840,6 +846,16 @@ margin-left: 6px;
     to { opacity: 1; transform: translateY(0); }
 }
 
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.7s cubic-bezier(.19,1,.22,1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* ========================= RESPONSIVE ========================== */
 @media (max-width: 900px) {
@@ -874,3 +890,85 @@ margin-left: 6px;
 * {
     -webkit-tap-highlight-color: transparent;
 }
+.cursor-glow {
+    position: fixed;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(123,75,31,0.15) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+#imageModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s ease;
+    z-index: 2000;
+}
+
+#imageModal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#imageModal img {
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 20px;
+}
+
+.shape1,
+.shape2 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(123,75,31,0.12), transparent);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.shape1 {
+    top: 10%;
+    left: -100px;
+}
+
+.shape2 {
+    bottom: 10%;
+    right: -120px;
+}
+
+.stats-strip {
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 20px;
+    background: linear-gradient(90deg, #7b4b1f, #5a3414);
+    color: white;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.page-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.6s ease;
+}
+
+.page-content.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
