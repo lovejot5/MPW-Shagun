@@ -193,8 +193,8 @@ header.scrolled {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 85%;
-    max-width: 360px;
+    width: 75%;
+    max-width: 300px;
     height: 100vh;
 
     display: flex;
