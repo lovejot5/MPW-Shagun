@@ -213,12 +213,17 @@ header.scrolled {
     box-shadow: -25px 0 60px rgba(0,0,0,0.25);
 
     transition: right 0.45s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 1001;
+    z-index: 1200;
 }
 
     #menu.active {
         right: 0;
     }
+   
+   #menu li,
+   #menu a {
+    pointer-events: auto;
+}
 
     .nav-link {
         font-size: 22px;
@@ -254,7 +259,7 @@ header.scrolled {
     opacity: 0;
     pointer-events: none;
     transition: 0.4s ease;
-    z-index: 1000;
+    z-index: 900;
 }
 
 .menu-overlay.active {
