@@ -659,30 +659,29 @@ section {
 
 
 /* ========================= FOOTER ========================== */
-
-/* ================= FOOTER (FINAL FIXED) ================= */
+/* ================= FINAL FOOTER SYSTEM ================= */
 
 .site-footer {
-    background: linear-gradient(to bottom, #0e141b, #081018);
-    color: #d6d6d6;
-    padding: 80px 20px 40px;
-    margin-top: 80px;
+    background: linear-gradient(180deg, #0c141c 0%, #071018 100%);
+    color: #d8d8d8;
+    padding: 70px 20px 30px;
+    margin-top: 60px;
 }
 
-/* Top Center Logo Area */
+/* Top Branding */
 .footer-top {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .footer-top img {
-    width: 75px;
-    margin-bottom: 15px;
+    width: 70px;
+    margin: 0 auto 15px;
 }
 
 .footer-top h3 {
+    color: #fff;
     font-size: 20px;
-    color: white;
     margin-bottom: 5px;
 }
 
@@ -696,33 +695,33 @@ section {
     max-width: 1200px;
     margin: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1.3fr;
-    gap: 50px;
-    align-items: start;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    align-items: flex-start;
 }
 
 /* Column Titles */
 .footer-grid h4 {
     font-size: 16px;
-    margin-bottom: 18px;
-    color: white;
+    color: #fff;
+    margin-bottom: 15px;
 }
 
 /* Links */
 .footer-grid a {
     display: block;
     font-size: 14px;
-    margin-bottom: 10px;
-    color: #c5c5c5;
+    margin-bottom: 8px;
+    color: #bfbfbf;
     transition: 0.3s ease;
 }
 
 .footer-grid a:hover {
-    color: white;
-    transform: translateX(6px);
+    color: #ffffff;
+    transform: translateX(4px);
 }
 
-/* Contact text */
+/* Contact */
 .footer-contact p {
     font-size: 14px;
     line-height: 1.6;
@@ -731,33 +730,33 @@ section {
 /* Map */
 .footer-map iframe {
     width: 100%;
-    height: 220px;
-    border-radius: 18px;
+    height: 190px;
+    border-radius: 16px;
     border: none;
 }
 
-/* Bottom Line */
+/* Bottom */
 .footer-bottom {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
     text-align: center;
-    margin-top: 60px;
-    padding-top: 25px;
     font-size: 13px;
     opacity: 0.6;
-    border-top: 1px solid rgba(255,255,255,0.06);
 }
 
-/* ================= MOBILE ================= */
+/* ================= MOBILE FIX ================= */
 
 @media (max-width: 900px) {
 
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
         text-align: center;
+        gap: 35px;
     }
 
-    .footer-grid a:hover {
-        transform: none;
+    .footer-top img {
+        margin: 0 auto 15px;
     }
 
     .footer-map iframe {
@@ -767,7 +766,12 @@ section {
     .footer-contact p {
         text-align: center;
     }
+
+    .footer-grid a:hover {
+        transform: none;
+    }
 }
+
 /* ========================= ANIMATIONS ========================== */
 
 .fade-in {
