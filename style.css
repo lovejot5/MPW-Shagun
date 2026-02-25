@@ -54,6 +54,7 @@ body {
     background: linear-gradient(180deg, #efe3d3 0%, #e3d5c3 100%);
     color: var(--text-dark);
     line-height: 1.7;
+    overflow-x: hidden;
 }
 
 img {
@@ -69,6 +70,11 @@ a {
 
 ul {
     list-style: none;
+}
+
+html, body {
+    height: auto;
+    min-height: 100%;
 }
 
 
@@ -961,6 +967,7 @@ margin-left: 6px;
 }
 
 .page-content {
+    position: relative;   /* ADD THIS LINE */
     opacity: 0;
     transform: translateY(20px);
     transition: 0.6s ease;
