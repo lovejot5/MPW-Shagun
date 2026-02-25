@@ -38,18 +38,20 @@ function initHeaderScroll() {
 /* ========================= MOBILE MENU ========================== */
 
 function initMobileMenu() {
-    const menuBtn = document.querySelector(".menu-btn");
+    const menuBtn = document.getElementById("menuBtn");
     const menu = document.getElementById("menu");
 
     if (!menuBtn || !menu) return;
 
     menuBtn.addEventListener("click", () => {
         menu.classList.toggle("active");
+        menuBtn.classList.toggle("active"); // THIS LINE ADDED
     });
 
     document.querySelectorAll(".nav-link").forEach(link => {
         link.addEventListener("click", () => {
             menu.classList.remove("active");
+            menuBtn.classList.remove("active"); // RESET ICON
         });
     });
 }
