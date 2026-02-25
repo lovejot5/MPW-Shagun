@@ -340,39 +340,68 @@ header.scrolled {
 }
 
 
-/* ========================= HERO ========================== */
+/* ================= HERO (NO IMAGE VERSION) ================= */
 
 .hero {
     margin-top: 80px;
-    min-height: 85vh;
-    background: url("Images/GPC1.jpg") center/cover no-repeat;
+    min-height: 75vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    position: relative;
-}
+    justify-content: center;
+    padding: 60px 20px;
 
-.hero.small-hero {
-    min-height: 55vh;
+    /* Elegant gradient instead of image */
+    background: linear-gradient(
+        135deg,
+        #efe3d3 0%,
+        #e2d2bd 50%,
+        #d8cbb8 100%
+    );
 }
 
 .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
+    display: none; /* remove dark overlay */
 }
 
 .hero-content {
-    position: relative;
     max-width: 850px;
     padding: 60px;
-    border-radius: var(--radius-lg);
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(15px);
-    color: white;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
     text-align: center;
     box-shadow: var(--shadow-medium);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.hero-content h1 {
+    font-size: 38px;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.hero-content p {
+    font-size: 16px;
+    color: var(--text-light);
+    max-width: 650px;
+    margin: auto;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .hero {
+        min-height: 60vh;
+        padding: 40px 15px;
+    }
+
+    .hero-content {
+        padding: 35px;
+    }
+
+    .hero-content h1 {
+        font-size: 26px;
+    }
 }
 
 
