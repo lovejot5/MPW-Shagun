@@ -791,7 +791,16 @@ section {
 
 /* ========================= RESPONSIVE ========================== */
 
-@media (max-width: 900px) {
+@@media (max-width: 900px) {
+
+    header {
+        padding: 12px 20px;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+
     .grid-2,
     .grid-3,
     .grid-4 {
