@@ -38,37 +38,43 @@ function initHeaderScroll() {
 /* ========================= MOBILE MENU ========================== */
 
 function initMobileMenu() {
-/*    const menuBtn = document.getElementById("menuBtn");
-    const menu = document.getElementById("menu");
+
+    const menuBtn = document.querySelector(".menu-btn");
+    const menu = document.querySelector("#menu");
+    const overlay = document.querySelector(".menu-overlay");
 
     if (!menuBtn || !menu) return;
 
     menuBtn.addEventListener("click", () => {
         menu.classList.toggle("active");
-        menuBtn.classList.toggle("active"); // THIS LINE ADDED
+        menuBtn.classList.toggle("active");
+
+        if (overlay) {
+            overlay.classList.toggle("active");
+        }
     });
 
+    // Close when clicking a link
     document.querySelectorAll(".nav-link").forEach(link => {
         link.addEventListener("click", () => {
             menu.classList.remove("active");
-            menuBtn.classList.remove("active"); // RESET ICON
+            menuBtn.classList.remove("active");
+
+            if (overlay) {
+                overlay.classList.remove("active");
+            }
         });
     });
+
+    // Close when clicking overlay
+    if (overlay) {
+        overlay.addEventListener("click", () => {
+            menu.classList.remove("active");
+            menuBtn.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+    }
 }
-*/
-const menuBtn = document.querySelector(".menu-toggle");
-const mobileMenu = document.querySelector(".mobile-menu");
-const overlay = document.querySelector(".menu-overlay");
-
-menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("active");
-    overlay.classList.toggle("active");
-});
-
-overlay.addEventListener("click", () => {
-    mobileMenu.classList.remove("active");
-    overlay.classList.remove("active");
-});
 
 /* ========================= ACTIVE NAV AUTO DETECT ========================== */
 
