@@ -50,9 +50,7 @@ function initMobileMenu() {
         document.body.classList.toggle("menu-open");
     });
 
-    overlay.addEventListener("click", () => {
-        closeMenu();
-    });
+    overlay.addEventListener("click", closeMenu);
 
     function closeMenu() {
         menu.classList.remove("active");
@@ -61,11 +59,10 @@ function initMobileMenu() {
         document.body.classList.remove("menu-open");
     }
 
-    // ONLY close menu on link click — DO NOT prevent default
+    // 👇 THIS PART CHANGED
     document.querySelectorAll(".nav-link").forEach(link => {
         link.addEventListener("click", () => {
-            closeMenu();
-            // DO NOT preventDefault()
+            setTimeout(closeMenu, 50);
         });
     });
 }
