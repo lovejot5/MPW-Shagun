@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initParallax();
     initMagneticButtons();
     initCursorGlow();
-    initInertiaScroll();
 
     /* Components */
     initFAQ();
@@ -91,10 +90,9 @@ function initScrollReveal() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("active");
-                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
 
     elements.forEach(el => observer.observe(el));
 }
@@ -181,24 +179,6 @@ function initCursorGlow() {
         glow.style.left = e.clientX + "px";
         glow.style.top = e.clientY + "px";
     });
-}
-
-/* ================= INERTIA SCROLL (SAFE VERSION) ================= */
-function initInertiaScroll() {
-    let target = window.scrollY;
-    let current = window.scrollY;
-
-    window.addEventListener("wheel", (e) => {
-        target += e.deltaY * 0.6;
-    });
-
-    function animate() {
-        current += (target - current) * 0.08;
-        window.scrollTo(0, current);
-        requestAnimationFrame(animate);
-    }
-
-    animate();
 }
 
 /* ================= MAGNETIC BUTTONS ================= */
