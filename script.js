@@ -43,23 +43,29 @@ function initMobileMenu() {
 
     if (!menuBtn || !menu || !overlay) return;
 
-    const toggleMenu = () => {
-        const isOpen = menu.classList.toggle("active");
+    menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("active");
         menuBtn.classList.toggle("active");
         overlay.classList.toggle("active");
-        document.body.classList.toggle("menu-open", isOpen);
-    };
+        document.body.classList.toggle("menu-open");
+    });
 
-    menuBtn.addEventListener("click", toggleMenu);
-    overlay.addEventListener("click", toggleMenu);
+    overlay.addEventListener("click", () => {
+        closeMenu();
+    });
 
-    // Close menu when clicking links
+    function closeMenu() {
+        menu.classList.remove("active");
+        menuBtn.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.classList.remove("menu-open");
+    }
+
+    // ONLY close menu on link click — DO NOT prevent default
     document.querySelectorAll(".nav-link").forEach(link => {
         link.addEventListener("click", () => {
-            menu.classList.remove("active");
-            menuBtn.classList.remove("active");
-            overlay.classList.remove("active");
-            document.body.classList.remove("menu-open");
+            closeMenu();
+            // DO NOT preventDefault()
         });
     });
 }
@@ -240,19 +246,25 @@ function initBackToTop() {
 /* ========================= SMOOTH SCROLL ========================== */
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        anchor.addEventListener("click", function (e) {
+            const targetId = this.getAttribute("href");
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
+            // Ignore pure "#"
+            if (targetId === "#") return;
+
+            const target = document.querySelector(targetId);
+            if (!target) return;
+
+            e.preventDefault();
+
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
         });
     });
 }
