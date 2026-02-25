@@ -659,22 +659,21 @@ section {
 
 
 /* ========================= FOOTER ========================== */
-/* ================= FINAL FOOTER SYSTEM ================= */
 
-/* ================= COMPACT PROFESSIONAL FOOTER ================= */
+/* ================= REFINED FOOTER ================= */
 
 .site-footer {
     background: linear-gradient(180deg, #0c141c 0%, #081018 100%);
     color: #d4d4d4;
-    padding: 50px 20px 25px;
+    padding: 45px 20px 25px;
     margin-top: 40px;
 }
 
-/* ===== Top Branding ===== */
+/* ===== Branding ===== */
 
 .footer-top {
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .footer-top img {
@@ -682,7 +681,7 @@ section {
     height: 65px;
     border-radius: 50%;
     object-fit: cover;
-    margin: 0 auto 12px;
+    margin-bottom: 10px;
     border: 2px solid rgba(255,255,255,0.15);
 }
 
@@ -706,12 +705,13 @@ section {
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     align-items: flex-start;
+    text-align: left; /* Important */
 }
 
-/* Column Titles */
+/* Headings */
 .footer-grid h4 {
     font-size: 15px;
-    color: #fff;
+    color: #ffffff;
     margin-bottom: 12px;
 }
 
@@ -721,7 +721,6 @@ section {
     font-size: 13px;
     margin-bottom: 6px;
     color: #bfbfbf;
-    transition: 0.2s ease;
 }
 
 .footer-grid a:hover {
@@ -734,37 +733,47 @@ section {
     line-height: 1.5;
 }
 
-/* Map */
+/* ===== Locate Us (Grey Section) ===== */
+
+.footer-map {
+    background: #e6e6e6; /* Grey shade */
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.footer-map h4 {
+    color: #222;
+}
+
 .footer-map iframe {
     width: 100%;
-    height: 160px;
-    border-radius: 12px;
+    height: 150px;
+    border-radius: 10px;
     border: none;
 }
 
 /* ===== Bottom ===== */
 
 .footer-bottom {
-    margin-top: 35px;
+    margin-top: 30px;
     padding-top: 15px;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(255,255,255,0.08);
     text-align: center;
     font-size: 12px;
     opacity: 0.6;
 }
 
-/* ================= MOBILE FIX ================= */
+/* ================= MOBILE ================= */
 
 @media (max-width: 900px) {
 
-    /* Horizontal grid instead of vertical stacking */
     .footer-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
+        gap: 20px;
         text-align: left;
     }
 
-    /* Map full width below grid */
+    /* Move Locate Us full width below */
     .footer-map {
         grid-column: span 3;
         margin-top: 15px;
@@ -772,10 +781,6 @@ section {
 
     .footer-map iframe {
         height: 170px;
-    }
-
-    .footer-top {
-        margin-bottom: 25px;
     }
 }
 
