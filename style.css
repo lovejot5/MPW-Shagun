@@ -250,9 +250,7 @@ header.scrolled {
 .menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.45); /* just darken */
     opacity: 0;
     pointer-events: none;
     transition: 0.4s ease;
@@ -267,6 +265,13 @@ header.scrolled {
 /* Prevent background scroll */
 body.menu-open {
     overflow: hidden;
+}
+
+body.menu-open main,
+body.menu-open section,
+body.menu-open .site-footer {
+    filter: blur(8px);
+    transition: 0.4s ease;
 }
 /* ================= HAMBURGER ANIMATION ================= */
 
