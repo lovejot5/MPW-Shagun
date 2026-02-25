@@ -128,6 +128,41 @@ header.scrolled {
     border-radius: 50%;
 }
 
+/* ================= HAMBURGER ANIMATION ================= */
+
+.menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    position: relative;
+    z-index: 1100;
+}
+
+.menu-btn span {
+    height: 3px;
+    width: 100%;
+    background: var(--text-dark);
+    border-radius: 3px;
+    transition: 0.4s ease;
+}
+
+/* ACTIVE STATE (Cross Animation) */
+
+.menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
 
 /* ========================= NAVIGATION ========================== */
 
