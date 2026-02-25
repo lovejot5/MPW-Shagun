@@ -43,14 +43,12 @@ function initMobileMenu() {
 
     if (!menuBtn || !menu || !overlay) return;
 
-    menuBtn.addEventListener("click", () => {
-        menu.classList.toggle("active");
-        menuBtn.classList.toggle("active");
-        overlay.classList.toggle("active");
-        document.body.classList.toggle("menu-open");
-    });
-
-    overlay.addEventListener("click", closeMenu);
+    function openMenu() {
+        menu.classList.add("active");
+        menuBtn.classList.add("active");
+        overlay.classList.add("active");
+        document.body.classList.add("menu-open");
+    }
 
     function closeMenu() {
         menu.classList.remove("active");
@@ -59,14 +57,28 @@ function initMobileMenu() {
         document.body.classList.remove("menu-open");
     }
 
-    // 👇 THIS PART CHANGED
-    document.querySelectorAll(".nav-link").forEach(link => {
-        link.addEventListener("click", () => {
-            setTimeout(closeMenu, 50);
-        });
+    menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (menu.classList.contains("active")) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
-}
 
+    // Close when clicking outside menu
+    document.addEventListener("click", (e) => {
+        if (
+            menu.classList.contains("active") &&
+            !menu.contains(e.target) &&
+            !menuBtn.contains(e.target)
+        ) {
+            closeMenu();
+        }
+    });
+
+    // IMPORTANT: DO NOT manually close on link click
+}
 /* ========================= ACTIVE NAV DETECTION ========================== */
 function setActiveNav() {
     const links = document.querySelectorAll(".nav-link");
