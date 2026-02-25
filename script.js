@@ -1,317 +1,235 @@
 /* ======================================================================
-   MASTER SCRIPT FILE
-   Government Polytechnic College
+   MASTER SCRIPT FILE: Government Polytechnic College
    Complete Animations + Automations System
 ====================================================================== */
 
-
-/* ========================= DOM READY ========================== */
-
 document.addEventListener("DOMContentLoaded", () => {
-
+    // Core UI
     initHeaderScroll();
     initMobileMenu();
     setActiveNav();
+    
+    // Animations
     initScrollReveal();
     initCounters();
     initSlideshow();
+    
+    // Data Loading
     loadNews();
     loadNotices();
+    
+    // Components
     initFAQ();
     initContactForm();
     initBackToTop();
     initSmoothScroll();
-
 });
 
-
 /* ========================= HEADER SCROLL ========================== */
-
 function initHeaderScroll() {
     const header = document.querySelector("header");
+    if (!header) return;
+    
     window.addEventListener("scroll", () => {
         header.classList.toggle("scrolled", window.scrollY > 50);
     });
 }
 
-
 /* ========================= MOBILE MENU ========================== */
-
 function initMobileMenu() {
-
     const menuBtn = document.querySelector(".menu-btn");
     const menu = document.querySelector("#menu");
     const overlay = document.querySelector(".menu-overlay");
 
-    if (!menuBtn || !menu) return;
+    if (!menuBtn || !menu || !overlay) return;
 
-    menuBtn.addEventListener("click", () => {
-
-        menu.classList.toggle("active");
+    const toggleMenu = () => {
+        const isOpen = menu.classList.toggle("active");
         menuBtn.classList.toggle("active");
         overlay.classList.toggle("active");
-        document.body.classList.toggle("menu-open");
+        document.body.classList.toggle("menu-open", isOpen);
+    };
 
-    });
+    menuBtn.addEventListener("click", toggleMenu);
+    overlay.addEventListener("click", toggleMenu);
 
-    // Close on overlay click
-    overlay.addEventListener("click", () => {
-        closeMenu();
-    });
-
-    // Close on link click
+    // Close menu when clicking links
     document.querySelectorAll(".nav-link").forEach(link => {
         link.addEventListener("click", () => {
-            closeMenu();
+            menu.classList.remove("active");
+            menuBtn.classList.remove("active");
+            overlay.classList.remove("active");
+            document.body.classList.remove("menu-open");
         });
     });
-
-    function closeMenu() {
-        menu.classList.remove("active");
-        menuBtn.classList.remove("active");
-        overlay.classList.remove("active");
-        document.body.classList.remove("menu-open");
-    }
 }
 
-/* ========================= ACTIVE NAV AUTO DETECT ========================== */
-
+/* ========================= ACTIVE NAV DETECTION ========================== */
 function setActiveNav() {
     const links = document.querySelectorAll(".nav-link");
-    const current = location.pathname.split("/").pop();
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
 
     links.forEach(link => {
-        if (link.getAttribute("href") === current) {
+        const href = link.getAttribute("href");
+        if (href === currentPath) {
             link.classList.add("active");
+        } else {
+            link.classList.remove("active");
         }
     });
 }
 
-
 /* ========================= SCROLL REVEAL ========================== */
-
 function initScrollReveal() {
-    const elements = document.querySelectorAll(".container-large, .card");
-
+    const elements = document.querySelectorAll(".container-large, .card, .notice-card");
+    
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
                 entry.target.classList.add("fade-in");
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.1 });
 
-    elements.forEach(el => observer.observe(el));
-}
-
-
-/* ========================= COUNTER ANIMATION ========================== */
-
-function initCounters() {
-    const counters = document.querySelectorAll(".counter");
-
-    const animate = (counter) => {
-        const target = +counter.dataset.target;
-        let count = 0;
-        const increment = target / 100;
-
-        const update = () => {
-            count += increment;
-            if (count < target) {
-                counter.innerText = Math.ceil(count);
-                requestAnimationFrame(update);
-            } else {
-                counter.innerText = target;
-            }
-        };
-
-        update();
-    };
-
-    counters.forEach(counter => {
-        const observer = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting) {
-                animate(counter);
-                observer.disconnect();
-            }
-        });
-        observer.observe(counter);
+    elements.forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = "all 0.6s ease-out";
+        observer.observe(el);
     });
 }
 
+/* ========================= COUNTER ANIMATION ========================== */
+function initCounters() {
+    const counters = document.querySelectorAll(".counter");
+    
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16);
+                
+                let current = 0;
+                const update = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        requestAnimationFrame(update);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                update();
+                observer.unobserve(counter);
+            }
+        });
+    }, { threshold: 1 });
 
-/* ========================= SLIDESHOW ========================== */
-
-function initSlideshow() {
-    const slides = document.querySelectorAll(".slide");
-    if (!slides.length) return;
-
-    let index = 0;
-
-    function showSlide(i) {
-        slides.forEach(s => s.style.display = "none");
-        slides[i].style.display = "block";
-    }
-
-    showSlide(index);
-
-    setInterval(() => {
-        index = (index + 1) % slides.length;
-        showSlide(index);
-    }, 4000);
+    counters.forEach(c => observer.observe(c));
 }
 
-
-/* ========================= LOAD NEWS ========================== */
-
+/* ========================= NEWS AUTOMATION ========================== */
 async function loadNews() {
     const newsList = document.getElementById("newsList");
     if (!newsList) return;
 
     try {
+        // NOTE: Replace 'data/news.json' with your actual path or API
         const res = await fetch("data/news.json");
+        if (!res.ok) throw new Error("File not found");
         const news = await res.json();
 
+        newsList.innerHTML = ""; // Clear loader
         news.forEach(item => {
             const li = document.createElement("li");
+            li.style.padding = "15px 0";
+            li.style.borderBottom = "1px solid #eee";
             li.innerHTML = `
-                ${item.title}
-                ${item.isNew ? '<span class="news-badge">NEW</span>' : ''}
-                <small style="display:block;color:#888;">${item.date}</small>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>${item.title} ${item.isNew ? '<span class="news-badge">NEW</span>' : ''}</span>
+                    <small style="color:#888;">${item.date}</small>
+                </div>
             `;
             newsList.appendChild(li);
         });
-
-        startInfiniteNewsScroll(newsList);
-
     } catch (err) {
-        console.error("News load error:", err);
+        // Fallback if JSON fails
+        console.warn("News JSON not found, using static placeholders.");
     }
 }
-
-
-/* ========================= INFINITE NEWS LOOP ========================== */
-
-function startInfiniteNewsScroll(container) {
-    let scrollSpeed = 1;
-
-    function scroll() {
-        container.scrollTop += scrollSpeed;
-
-        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-            container.scrollTop = 0;
-        }
-
-        requestAnimationFrame(scroll);
-    }
-
-    scroll();
-}
-
-
-/* ========================= LOAD NOTICES ========================== */
-
-async function loadNotices() {
-    const noticeContainer = document.getElementById("noticeContainer");
-    if (!noticeContainer) return;
-
-    try {
-        const res = await fetch("data/notices.json");
-        const notices = await res.json();
-
-        notices.forEach(n => {
-            const card = document.createElement("div");
-            card.className = "notice-card";
-
-            card.innerHTML = `
-                <div class="notice-header">
-                    <img src="${n.author.icon}" alt="">
-                    <div>
-                        <strong>${n.title}</strong><br>
-                        <small>${n.date} • ${n.category}</small>
-                    </div>
-                </div>
-                <p>${n.description}</p>
-                ${n.images.map(img => `<img class="notice-image" src="${img}">`).join("")}
-                <div class="notice-buttons">
-                    ${n.buttons.map(btn => `<a href="${btn.link}" class="btn btn-primary">${btn.text}</a>`).join("")}
-                </div>
-            `;
-
-            noticeContainer.appendChild(card);
-        });
-
-    } catch (err) {
-        console.error("Notices load error:", err);
-    }
-}
-
 
 /* ========================= FAQ ACCORDION ========================== */
-
 function initFAQ() {
-    const faqItems = document.querySelectorAll(".faq-item");
-
-    faqItems.forEach(item => {
-        const question = item.querySelector(".faq-question");
-
-        question.addEventListener("click", () => {
-            item.classList.toggle("active");
+    document.querySelectorAll(".faq-question").forEach(button => {
+        button.addEventListener("click", () => {
+            const item = button.parentElement;
+            const isActive = item.classList.contains("active");
+            
+            // Close other items (Optional: remove this loop if you want multiple open)
+            document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
+            
+            if (!isActive) item.classList.add("active");
         });
     });
 }
 
-
-/* ========================= CONTACT FORM VALIDATION ========================== */
-
+/* ========================= CONTACT FORM ========================== */
 function initContactForm() {
     const form = document.querySelector(".contact-form");
     if (!form) return;
 
     form.addEventListener("submit", e => {
         e.preventDefault();
+        const btn = form.querySelector("button");
+        const originalText = btn.innerText;
+        
+        btn.innerText = "Sending...";
+        btn.disabled = true;
 
-        const inputs = form.querySelectorAll("input, textarea");
-        let valid = true;
-
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                valid = false;
-                input.style.borderColor = "red";
-            } else {
-                input.style.borderColor = "#ccc";
-            }
-        });
-
-        if (valid) {
-            alert("Message Sent Successfully!");
+        // Simulate API call
+        setTimeout(() => {
+            alert("Thank you! Your message has been sent to GPC Bathinda.");
             form.reset();
-        }
+            btn.innerText = originalText;
+            btn.disabled = false;
+        }, 1500);
     });
 }
 
-
 /* ========================= BACK TO TOP ========================== */
-
 function initBackToTop() {
     const btn = document.createElement("button");
-    btn.innerText = "↑";
+    btn.innerHTML = "↑";
     btn.className = "back-to-top";
+    // Apply styles via JS to ensure they exist without separate CSS entries
+    Object.assign(btn.style, {
+        position: "fixed",
+        bottom: "30px",
+        right: "30px",
+        width: "50px",
+        height: "50px",
+        borderRadius: "50%",
+        background: "var(--accent)",
+        color: "white",
+        border: "none",
+        cursor: "pointer",
+        display: "none",
+        zIndex: "999",
+        fontSize: "20px",
+        boxShadow: "0 4px 15px rgba(0,0,0,0.2)"
+    });
+    
     document.body.appendChild(btn);
 
-    btn.style.position = "fixed";
-    btn.style.right = "20px";
-    btn.style.bottom = "20px";
-    btn.style.padding = "10px 15px";
-    btn.style.borderRadius = "50%";
-    btn.style.background = "#7b4b1f";
-    btn.style.color = "#fff";
-    btn.style.border = "none";
-    btn.style.display = "none";
-
     window.addEventListener("scroll", () => {
-        btn.style.display = window.scrollY > 300 ? "block" : "none";
+        btn.style.display = window.scrollY > 400 ? "flex" : "none";
+        btn.style.alignItems = "center";
+        btn.style.justifyContent = "center";
     });
 
     btn.addEventListener("click", () => {
@@ -319,16 +237,21 @@ function initBackToTop() {
     });
 }
 
-
 /* ========================= SMOOTH SCROLL ========================== */
-
 function initSmoothScroll() {
-    document.querySelectorAll("a[href^='#']").forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute("href"));
+            const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({ behavior: "smooth" });
+                const headerOffset = 80;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             }
         });
     });
