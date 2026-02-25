@@ -190,32 +190,31 @@ header.scrolled {
     }
 
     #menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 85%;
-        max-width: 360px;
-        height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 360px;
+    height: 100vh;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;   /* 🔥 FIXED */
 
-        padding: 80px 40px;
-        gap: 28px;
+    padding: 110px 40px 40px 40px;
+    gap: 28px;
 
-        /* REAL GLASS EFFECT */
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(28px) saturate(180%);
-        -webkit-backdrop-filter: blur(28px) saturate(180%);
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
 
-        border-left: 1px solid rgba(255,255,255,0.4);
-        box-shadow: -20px 0 60px rgba(0,0,0,0.25);
+    border-left: 1px solid rgba(255,255,255,0.35);
+    box-shadow: -25px 0 60px rgba(0,0,0,0.25);
 
-        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-        z-index: 1001;
-    }
+    transition: right 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1001;
+}
 
     #menu.active {
         right: 0;
@@ -332,22 +331,6 @@ body.menu-open {
     height: 3px;
     background: var(--accent);
     border-radius: 10px;
-}
-
-
-/* ========================= MOBILE MENU ========================== */
-
-.menu-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.menu-btn span {
-    width: 25px;
-    height: 3px;
-    background: var(--text-dark);
 }
 
 
