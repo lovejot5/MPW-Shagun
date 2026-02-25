@@ -303,11 +303,6 @@ body.menu-open {
 }
 /* ========================= NAVIGATION ========================== */
 
-#menu {
-    display: flex;
-    gap: 25px;
-}
-
 .nav-link {
     position: relative;
     padding: 6px 4px;
@@ -334,7 +329,7 @@ body.menu-open {
 }
 
 
-/* ================= HERO (NO IMAGE VERSION) ================= */
+/* ================= HERO (NO IMAGE VERSION) ================ */
 
 .hero {
     margin-top: 80px;
@@ -815,9 +810,5 @@ section {
     .container-large {
         padding: 40px;
     }
-
-    .footer-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
+   
 }
