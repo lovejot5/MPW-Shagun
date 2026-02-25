@@ -1,41 +1,43 @@
 /* ======================================================================
    MASTER SCRIPT FILE: Government Polytechnic College
-   Complete Animations + Automations System
+   Premium Modern Interactive System
 ====================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Core UI
+
+    /* Core */
     initHeaderScroll();
     initMobileMenu();
     setActiveNav();
-    
-    // Animations
+
+    /* Animations */
     initScrollReveal();
     initCounters();
-    initSlideshow();
-    
-    // Data Loading
-    loadNews();
-    loadNotices();
-    
-    // Components
+    initStatsCounter();
+    initParallax();
+    initMagneticButtons();
+    initCursorGlow();
+    initInertiaScroll();
+
+    /* Components */
     initFAQ();
     initContactForm();
     initBackToTop();
     initSmoothScroll();
+    initImageModal();
 });
 
-/* ========================= HEADER SCROLL ========================== */
+/* ================= HEADER SCROLL + BLUR ================= */
 function initHeaderScroll() {
     const header = document.querySelector("header");
     if (!header) return;
-    
+
     window.addEventListener("scroll", () => {
-        header.classList.toggle("scrolled", window.scrollY > 50);
+        header.classList.toggle("scrolled", window.scrollY > 40);
     });
 }
 
-/* ========================= MOBILE MENU ========================== */
+/* ================= MOBILE MENU ================= */
 function initMobileMenu() {
     const menuBtn = document.querySelector(".menu-btn");
     const menu = document.querySelector("#menu");
@@ -59,169 +61,210 @@ function initMobileMenu() {
 
     menuBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (menu.classList.contains("active")) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
+        menu.classList.contains("active") ? closeMenu() : openMenu();
     });
 
-    // Close when clicking outside menu
     document.addEventListener("click", (e) => {
         if (
             menu.classList.contains("active") &&
             !menu.contains(e.target) &&
             !menuBtn.contains(e.target)
-        ) {
-            closeMenu();
-        }
+        ) closeMenu();
     });
-
-    // IMPORTANT: DO NOT manually close on link click
 }
-/* ========================= ACTIVE NAV DETECTION ========================== */
+
+/* ================= ACTIVE NAV ================= */
 function setActiveNav() {
     const links = document.querySelectorAll(".nav-link");
-    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const current = window.location.pathname.split("/").pop() || "index.html";
 
     links.forEach(link => {
-        const href = link.getAttribute("href");
-        if (href === currentPath) {
-            link.classList.add("active");
-        } else {
-            link.classList.remove("active");
-        }
+        link.classList.toggle("active", link.getAttribute("href") === current);
     });
 }
 
-/* ========================= SCROLL REVEAL ========================== */
+/* ================= SCROLL REVEAL ================= */
 function initScrollReveal() {
-    const elements = document.querySelectorAll(".container-large, .card, .notice-card");
-    
+    const elements = document.querySelectorAll(".reveal");
+
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-                entry.target.classList.add("fade-in");
+                entry.target.classList.add("active");
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
 
-    elements.forEach(el => {
-        el.style.opacity = "0";
-        el.style.transform = "translateY(20px)";
-        el.style.transition = "all 0.6s ease-out";
-        observer.observe(el);
-    });
+    elements.forEach(el => observer.observe(el));
 }
 
-/* ========================= COUNTER ANIMATION ========================== */
+/* ================= GENERAL COUNTERS ================= */
 function initCounters() {
     const counters = document.querySelectorAll(".counter");
-    
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = +counter.getAttribute('data-target');
-                const duration = 2000; // 2 seconds
-                const step = target / (duration / 16);
-                
-                let current = 0;
-                const update = () => {
-                    current += step;
-                    if (current < target) {
-                        counter.innerText = Math.ceil(current);
-                        requestAnimationFrame(update);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
+
+    counters.forEach(counter => {
+        const target = +counter.dataset.target;
+        let count = 0;
+
+        const update = () => {
+            const increment = target / 100;
+            if (count < target) {
+                count += increment;
+                counter.innerText = Math.ceil(count);
+                requestAnimationFrame(update);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
                 update();
-                observer.unobserve(counter);
+                observer.disconnect();
             }
         });
-    }, { threshold: 1 });
 
-    counters.forEach(c => observer.observe(c));
+        observer.observe(counter);
+    });
 }
 
-/* ========================= NEWS AUTOMATION ========================== */
-async function loadNews() {
-    const newsList = document.getElementById("newsList");
-    if (!newsList) return;
+/* ================= STATS STRIP COUNTER ================= */
+function initStatsCounter() {
+    const stats = document.querySelectorAll(".stat-number");
 
-    try {
-        // NOTE: Replace 'data/news.json' with your actual path or API
-        const res = await fetch("data/news.json");
-        if (!res.ok) throw new Error("File not found");
-        const news = await res.json();
+    stats.forEach(stat => {
+        const target = +stat.dataset.target;
+        let count = 0;
 
-        newsList.innerHTML = ""; // Clear loader
-        news.forEach(item => {
-            const li = document.createElement("li");
-            li.style.padding = "15px 0";
-            li.style.borderBottom = "1px solid #eee";
-            li.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span>${item.title} ${item.isNew ? '<span class="news-badge">NEW</span>' : ''}</span>
-                    <small style="color:#888;">${item.date}</small>
-                </div>
-            `;
-            newsList.appendChild(li);
+        const animate = () => {
+            const increment = target / 80;
+            if (count < target) {
+                count += increment;
+                stat.innerText = Math.ceil(count);
+                requestAnimationFrame(animate);
+            } else {
+                stat.innerText = target + "+";
+            }
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                animate();
+                observer.disconnect();
+            }
         });
-    } catch (err) {
-        // Fallback if JSON fails
-        console.warn("News JSON not found, using static placeholders.");
-    }
+
+        observer.observe(stat);
+    });
 }
 
-/* ========================= FAQ ACCORDION ========================== */
-function initFAQ() {
-    document.querySelectorAll(".faq-question").forEach(button => {
-        button.addEventListener("click", () => {
-            const item = button.parentElement;
-            const isActive = item.classList.contains("active");
-            
-            // Close other items (Optional: remove this loop if you want multiple open)
-            document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
-            
-            if (!isActive) item.classList.add("active");
+/* ================= PARALLAX SHAPES ================= */
+function initParallax() {
+    const shape1 = document.querySelector(".shape1");
+    const shape2 = document.querySelector(".shape2");
+
+    window.addEventListener("scroll", () => {
+        const scroll = window.scrollY;
+
+        if (shape1) shape1.style.transform = `translateY(${scroll * 0.08}px)`;
+        if (shape2) shape2.style.transform = `translateY(${scroll * -0.06}px)`;
+    });
+}
+
+/* ================= CURSOR GLOW ================= */
+function initCursorGlow() {
+    const glow = document.querySelector(".cursor-glow");
+    if (!glow) return;
+
+    window.addEventListener("mousemove", (e) => {
+        glow.style.left = e.clientX + "px";
+        glow.style.top = e.clientY + "px";
+    });
+}
+
+/* ================= INERTIA SCROLL (SAFE VERSION) ================= */
+function initInertiaScroll() {
+    let target = window.scrollY;
+    let current = window.scrollY;
+
+    window.addEventListener("wheel", (e) => {
+        target += e.deltaY * 0.6;
+    });
+
+    function animate() {
+        current += (target - current) * 0.08;
+        window.scrollTo(0, current);
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
+/* ================= MAGNETIC BUTTONS ================= */
+function initMagneticButtons() {
+    document.querySelectorAll(".btn").forEach(btn => {
+        btn.addEventListener("mousemove", (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        });
+
+        btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "translate(0,0)";
         });
     });
 }
 
-/* ========================= CONTACT FORM ========================== */
+/* ================= IMAGE MODAL ================= */
+function initImageModal() {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+
+    if (!modal || !modalImg) return;
+
+    document.querySelectorAll(".gallery-track img").forEach(img => {
+        img.addEventListener("click", () => {
+            modal.classList.add("active");
+            modalImg.src = img.src;
+        });
+    });
+
+    modal.addEventListener("click", () => {
+        modal.classList.remove("active");
+    });
+}
+
+/* ================= FAQ ================= */
+function initFAQ() {
+    document.querySelectorAll(".faq-question").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const item = btn.parentElement;
+            document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
+            item.classList.toggle("active");
+        });
+    });
+}
+
+/* ================= CONTACT FORM ================= */
 function initContactForm() {
     const form = document.querySelector(".contact-form");
     if (!form) return;
 
     form.addEventListener("submit", e => {
         e.preventDefault();
-        const btn = form.querySelector("button");
-        const originalText = btn.innerText;
-        
-        btn.innerText = "Sending...";
-        btn.disabled = true;
-
-        // Simulate API call
-        setTimeout(() => {
-            alert("Thank you! Your message has been sent to GPC Bathinda.");
-            form.reset();
-            btn.innerText = originalText;
-            btn.disabled = false;
-        }, 1500);
+        alert("Message sent successfully.");
+        form.reset();
     });
 }
 
-/* ========================= BACK TO TOP ========================== */
+/* ================= BACK TO TOP ================= */
 function initBackToTop() {
     const btn = document.createElement("button");
     btn.innerHTML = "↑";
     btn.className = "back-to-top";
-    // Apply styles via JS to ensure they exist without separate CSS entries
+
     Object.assign(btn.style, {
         position: "fixed",
         bottom: "30px",
@@ -229,16 +272,14 @@ function initBackToTop() {
         width: "50px",
         height: "50px",
         borderRadius: "50%",
-        background: "var(--accent)",
+        background: "#7b4b1f",
         color: "white",
         border: "none",
         cursor: "pointer",
         display: "none",
-        zIndex: "999",
-        fontSize: "20px",
-        boxShadow: "0 4px 15px rgba(0,0,0,0.2)"
+        zIndex: "999"
     });
-    
+
     document.body.appendChild(btn);
 
     window.addEventListener("scroll", () => {
@@ -252,13 +293,11 @@ function initBackToTop() {
     });
 }
 
-/* ========================= SMOOTH SCROLL ========================== */
+/* ================= SMOOTH ANCHOR SCROLL ================= */
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", function (e) {
             const targetId = this.getAttribute("href");
-
-            // Ignore pure "#"
             if (targetId === "#") return;
 
             const target = document.querySelector(targetId);
@@ -266,14 +305,20 @@ function initSmoothScroll() {
 
             e.preventDefault();
 
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
+            const offset = target.offsetTop - 80;
+            window.scrollTo({ top: offset, behavior: "smooth" });
         });
     });
 }
+
+/* ================= PAGE PRELOADER ================= */
+window.addEventListener("load", () => {
+    const preloader = document.querySelector(".preloader");
+    if (!preloader) return;
+
+    preloader.style.opacity = "0";
+    setTimeout(() => preloader.style.display = "none", 600);
+
+    const page = document.querySelector(".page-content");
+    if (page) page.classList.add("loaded");
+});
