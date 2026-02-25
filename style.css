@@ -202,8 +202,8 @@ header.scrolled {
     align-items: flex-start;
     justify-content: flex-start;
 
-    padding: 110px 40px 40px 40px;
-    gap: 28px;
+    padding: 90px 30px 30px 30px;
+    gap: 18px;
 
     background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(32px) saturate(180%);
@@ -226,12 +226,13 @@ header.scrolled {
 }
 
     .nav-link {
-        font-size: 22px;
-        font-weight: 500;
-        text-align: left;
-        width: 100%;
-        position: relative;
-    }
+    font-size: 17px;          /* smaller text */
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    padding: 6px 0;
+}
 
     .nav-link.active {
         color: var(--accent);
