@@ -54,7 +54,6 @@ body {
     background: linear-gradient(180deg, #efe3d3 0%, #e3d5c3 100%);
     color: var(--text-dark);
     line-height: 1.7;
-    overflow-x: hidden;
 }
 
 img {
