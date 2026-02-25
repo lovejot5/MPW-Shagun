@@ -38,7 +38,7 @@ function initHeaderScroll() {
 /* ========================= MOBILE MENU ========================== */
 
 function initMobileMenu() {
-    const menuBtn = document.getElementById("menuBtn");
+/*    const menuBtn = document.getElementById("menuBtn");
     const menu = document.getElementById("menu");
 
     if (!menuBtn || !menu) return;
@@ -55,7 +55,20 @@ function initMobileMenu() {
         });
     });
 }
+*/
+const menuBtn = document.querySelector(".menu-toggle");
+const mobileMenu = document.querySelector(".mobile-menu");
+const overlay = document.querySelector(".menu-overlay");
 
+menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+});
+
+overlay.addEventListener("click", () => {
+    mobileMenu.classList.remove("active");
+    overlay.classList.remove("active");
+});
 
 /* ========================= ACTIVE NAV AUTO DETECT ========================== */
 
