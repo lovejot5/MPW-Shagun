@@ -267,9 +267,7 @@ body.menu-open {
     overflow: hidden;
 }
 
-body.menu-open main,
-body.menu-open section,
-body.menu-open .site-footer {
+body.menu-open .page-content {
     filter: blur(8px);
     transition: 0.4s ease;
 }
