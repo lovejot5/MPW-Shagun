@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Government Polytechnic College, Bathinda</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government Polytechnic College, Bathinda</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- ================= HEADER ================= -->
-<header>
+
+<header id="header">
     <div class="logo">
         <img src="Images/logo.jpeg" alt="College Logo">
         <div>
@@ -21,14 +21,12 @@
 
     <ul id="menu">
         <li><a href="index.html" class="nav-link active">Home</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="departments.html" class="nav-link">Departments</a></li>
         <li><a href="student.html" class="nav-link">Student Corner</a></li>
-        <li><a href="notices.html" class="nav-link">Notices</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
     </ul>
 
-    <div class="menu-btn" onclick="toggleMenu(this)">
+    <div class="menu-btn" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
@@ -36,124 +34,132 @@
 </header>
 
 <!-- ================= HERO ================= -->
+
 <section class="hero">
     <div class="hero-content">
-        <h1>Government Polytechnic College, Bathinda</h1>
-
-        <p class="hero-description">
-            Government Polytechnic College, Bathinda was established in the year 
-            <strong>1985</strong> with the aim of imparting quality technical education 
-            in the field of Engineering and Technology. The institution caters to 
-            students of southern Punjab and is located on Bibiwala Road, approximately 
-            3 km from Bathinda Bus Stand and 4.2 km from Bathinda Railway Junction.
-            <br><br>
-            The college is spread over a lush green campus of 
-            <strong>22 acres</strong> and is committed to academic excellence, 
-            practical-based learning, and holistic student development.
+        <h1>Empowering Technical Excellence Since 1985</h1>
+        <p>
+            Government Polytechnic College, Bathinda provides quality
+            diploma education in engineering and technology with
+            strong academic discipline and industry alignment.
         </p>
-    </div>
-</section>
-
-<!-- ================= LATEST NEWS ================= -->
-<section class="section">
-    <div class="latest-news-wrapper card-box">
-        <h3 style="text-align:center;margin-bottom:25px;">Latest News</h3>
-
-        <div class="latest-news-container" id="newsGlass">
-            <ul class="latest-news-list" id="newsList">
-                <!-- Auto-loaded from JSON -->
-            </ul>
+        <div class="hero-buttons">
+            <a href="#" class="btn btn-primary">Apply Now</a>
+            <a href="#" class="btn btn-light">Download Prospectus</a>
         </div>
     </div>
 </section>
 
 <!-- ================= PRINCIPAL MESSAGE ================= -->
-<section class="section">
-    <div class="principal-card card-box">
-        <div class="principal-header">
-            <img src="Images/principal.jpeg" alt="Principal">
-            <div>
-                <h3>Principal’s Message</h3>
-                <span>Dr. Anuja Pupneja</span>
-                <p style="font-size:13px;color:gray;">Principal, GPC Bathinda</p>
-            </div>
-        </div>
 
+<section>
+<div class="container-large">
+<h2 class="section-title">Principal's Message</h2>
+
+<div class="principal-card">
+    <div class="principal-header">
+        <img src="Images/principal.jpg" alt="Principal">
+    </div>
+    <div>
         <p>
-            Government Polytechnic College, Bathinda strives to impart practical and 
-            quality education along with sufficient job-oriented skills. The institution 
-            has been honored with multiple awards by the Government of Punjab for excellence 
-            in technical education.
-            <br><br>
-            We strongly emphasize the overall personality development of every student 
-            by encouraging participation in academics, sports, and co-curricular activities, 
-            enabling them to become competent professionals and responsible citizens.
+            Since its establishment in 1985, Government Polytechnic College,
+            Bathinda has remained committed to excellence in diploma education.
+            Our mission is to nurture technically skilled professionals who
+            demonstrate innovation, discipline, and ethical values.
         </p>
     </div>
+</div>
+
+</div>
 </section>
 
-<!-- ================= STUDENT CORNER ================= -->
-<section class="student-corner">
-    <h2>Student Corner</h2>
+<!-- ================= NEWS ================= -->
 
-    <div class="cards">
-        <div class="card">Academic Calendar</div>
-        <div class="card">Results</div>
-        <div class="card">Internship Portal</div>
+<section>
+<div class="container-large">
+<h2 class="section-title">Latest News</h2>
+
+<div class="latest-news-container">
+    <ul id="newsList" class="latest-news-list"></ul>
+</div>
+
+</div>
+</section>
+
+<!-- ================= HIGHLIGHTS ================= -->
+
+<section>
+<div class="container-large">
+<h2 class="section-title">College Highlights</h2>
+
+<div class="grid-3">
+    <div class="card highlight-card">
+        <h3>22+ Acre Campus</h3>
+        <p>Modern infrastructure and fully equipped labs.</p>
     </div>
+    <div class="card highlight-card">
+        <h3>Industry Placement</h3>
+        <p>Strong placement support across Punjab.</p>
+    </div>
+    <div class="card highlight-card">
+        <h3>Government Institution</h3>
+        <p>Recognized and affordable diploma programs.</p>
+    </div>
+</div>
+
+</div>
+</section>
+
+<!-- ================= SLIDER ================= -->
+
+<section>
+<div class="container-large">
+<h2 class="section-title">Campus Gallery</h2>
+
+<div class="slider">
+    <div class="slides">
+        <img src="Images/GPC1.jpg" class="slide active">
+        <img src="Images/GPC1.jpg" class="slide">
+        <img src="Images/GPC1.jpg" class="slide">
+    </div>
+    <button class="prev" onclick="prevSlide()">❮</button>
+    <button class="next" onclick="nextSlide()">❯</button>
+</div>
+
+</div>
 </section>
 
 <!-- ================= FOOTER ================= -->
+
 <footer class="site-footer">
+<div class="footer-grid">
 
-    <div class="footer-top">
-        <img src="Images/logo.jpeg" alt="College Logo">
+    <div>
+        <img src="Images/logo.jpeg" style="width:70px;border-radius:50%;">
         <h3>Government Polytechnic College</h3>
-        <p>Bathinda</p>
+        <p>Bathinda, Punjab</p>
     </div>
 
-    <div class="footer-container">
-
-        <div>
-            <h4>Navigation</h4>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="departments.html">Departments</a>
-            <a href="student.html">Student Corner</a>
-            <a href="contact.html">Contact</a>
-        </div>
-
-        <div>
-            <h4>Important Links</h4>
-            <a href="#">Admissions</a>
-            <a href="#">Results</a>
-            <a href="#">Placements</a>
-            <a href="#">Internship Portal</a>
-            <a href="notices.html">Notices</a>
-        </div>
-
-        <div>
-            <h4>Contact</h4>
-            <p>Bibi Wala Road, Bathinda</p>
-            <p>gpcbathinda@punjab.gov.in</p>
-            <p>0164-2246394</p>
-        </div>
-
-        <div class="footer-map">
-            <h4>Locate Us</h4>
-            <iframe 
-                src="https://maps.google.com/maps?q=Government%20Polytechnic%20College%20Bathinda&t=&z=15&ie=UTF8&iwloc=&output=embed">
-            </iframe>
-        </div>
-
+    <div>
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="departments.html">Departments</a>
+        <a href="student.html">Student Corner</a>
+        <a href="contact.html">Contact</a>
     </div>
 
-    <div class="footer-bottom">
-        © 2025 Government Polytechnic College, Bathinda  
-        <br>
-        MPW Project — Designed & Developed by Shagun (CSE, 4th Semester)
+    <div>
+        <h4>Contact</h4>
+        <p>Bibi Wala Road, Bathinda</p>
+        <p>0164-2246394</p>
+        <p>gpcbathinda@punjab.gov.in</p>
     </div>
 
+</div>
+
+<div class="footer-bottom">
+© 2025 Government Polytechnic College, Bathinda
+</div>
 </footer>
 
 <script src="script.js"></script>
