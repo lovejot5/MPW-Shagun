@@ -38,9 +38,9 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(
     135deg,
-    #eef1f5 0%,
-    #e6ebf2 40%,
-    #dde3ec 100%
+    #f8f1e8 0%,
+    #efe4d6 40%,
+    #e6d6c4 100%
 );
     color: var(--text-dark);
     line-height: 1.7;
@@ -109,7 +109,8 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,248,240,0.7);
+border-bottom: 1px solid rgba(139,94,52,0.1);
 backdrop-filter: blur(20px);
 -webkit-backdrop-filter: blur(20px);
     display: flex;
@@ -668,11 +669,15 @@ margin-left: 6px;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #5f8cff, #7aa6ff);
+    background: linear-gradient(
+    135deg,
+    #a6784d,
+    #8b5e34
+);
+box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     color: white;
     border: none;
     border-radius: 14px;
-    box-shadow: 0 8px 20px rgba(95,140,255,0.35);
     transition: 0.3s ease;
 }
 
@@ -680,10 +685,6 @@ margin-left: 6px;
     transform: translateY(-2px);
     box-shadow: 0 12px 25px rgba(95,140,255,0.4);
 }
-.btn-primary:hover {
-    background: var(--accent-dark);
-}
-
 
 /* ========================= MAP & EMBEDS ========================== */
 
@@ -904,7 +905,7 @@ margin-left: 6px;
     position: fixed;
     width: 260px;
     height: 260px;
-    background: radial-gradient(circle, rgba(95,140,255,0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(139,94,52,0.15) 0%, transparent 70%);
     pointer-events: none;
     border-radius: 50%;
     transform: translate(-50%, -50%);
