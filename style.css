@@ -73,8 +73,8 @@ ul {
 }
 
 html, body {
-    height: auto;
-    min-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 
@@ -361,6 +361,8 @@ body.menu-open .page-content {
     margin-top: 80px;
     min-height: 75vh;
     display: flex;
+    width: 100%;
+    overflow: hidden;
     align-items: center;
     justify-content: center;
     padding: 60px 20px;
@@ -424,8 +426,9 @@ body.menu-open .page-content {
 
 section {
     padding: 90px 20px;
+    width: 100%;
     max-width: 1200px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .container-large {
@@ -951,11 +954,16 @@ margin-left: 6px;
 }
 
 .stats-strip {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 30px;
     padding: 50px 20px;
+
     background: linear-gradient(90deg, #7b4b1f, #5a3414);
     color: white;
     text-align: center;
