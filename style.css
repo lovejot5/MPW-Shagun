@@ -720,39 +720,48 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     border-radius: 50%;
 }
 
-
-/* ========================= FOOTER ========================== */
 /* ================= ULTRA LUXURY COFFEE FOOTER ================= */
 
 .site-footer {
     position: relative;
     overflow: hidden;
+    isolation: isolate;
 
     background: linear-gradient(
         180deg,
         #4a3426 0%,
-        #3a2a1f 40%,
-        #2b1f17 70%,
+        #3a2a1f 45%,
+        #2b1f17 80%,
         #1f1510 100%
     );
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
 
     color: #f1e9df;
-    padding: 80px 20px 40px;
-    margin-top: 120px;
+    padding: 65px 20px 30px;
+    margin-top: 100px;
 
     border-top: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 -15px 60px rgba(0,0,0,0.35);
+    box-shadow: 0 -12px 55px rgba(0,0,0,0.35);
 }
 
-/* ===== Elegant Top Wave Transition ===== */
+@keyframes gradientShift {
+    0% { background-position: 50% 0%; }
+    50% { background-position: 50% 100%; }
+    100% { background-position: 50% 0%; }
+}
+
+/* ===== Elegant Top Wave ===== */
 
 .site-footer::before {
     content: "";
     position: absolute;
-    top: -70px;
+    top: -60px;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 60px;
+    z-index: 0;
+
     background: url("data:image/svg+xml;utf8,\
 <svg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'>\
 <path fill='%23f8f1e8' d='M0,160L80,170C160,180,320,200,480,192C640,184,800,148,960,144C1120,140,1280,168,1360,182L1440,192V320H0Z'></path></svg>");
@@ -760,75 +769,74 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     background-repeat: no-repeat;
 }
 
-/* ===== Soft Premium Noise Texture ===== */
+/* ===== Subtle Noise ===== */
 
 .site-footer::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
+    z-index: 0;
+    opacity: 0.035;
+
     background-image: url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>\
 <filter id='noise'>\
-<feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/>\
+<feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/>\
 </filter>\
-<rect width='100%' height='100%' filter='url(%23noise)' opacity='0.04'/>\
+<rect width='100%' height='100%' filter='url(%23noise)'/>\
 </svg>");
+}
+
+/* ===== Content Above Layers ===== */
+
+.footer-top,
+.footer-grid,
+.footer-map,
+.footer-bottom {
+    position: relative;
+    z-index: 2;
 }
 
 /* ===== Top Branding ===== */
 
 .footer-top {
-    position: relative;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
-
-/* Warm Glow Behind Logo */
 
 .footer-top::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: 5px;
     left: 50%;
     transform: translateX(-50%);
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(
-        circle,
-        rgba(214,168,106,0.25),
-        transparent 70%
-    );
-    filter: blur(60px);
-    z-index: 0;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(214,168,106,0.3), transparent 70%);
+    filter: blur(55px);
+    z-index: -1;
     animation: pulseGlow 4s ease-in-out infinite;
 }
 
 @keyframes pulseGlow {
-    0%,100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
-    50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+    0%,100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
 .footer-top img {
-    position: relative;
-    z-index: 2;
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
-    display: block;
-    margin: 0 auto 12px auto;
-
-    border: 2px solid rgba(255,255,255,0.25);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    margin-bottom: 10px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
 }
 
 .footer-top h3 {
-    font-size: 19px;
-    color: #ffffff;
-    margin-bottom: 4px;
+    font-size: 18px;
+    margin-bottom: 3px;
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 .footer-top p {
@@ -836,12 +844,13 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     color: rgba(255,240,225,0.75);
 }
 
-/* ===== Gold Shimmer Divider ===== */
+/* ===== Gold Divider ===== */
 
 .footer-divider {
-    width: 160px;
+    width: 120px;
     height: 2px;
-    margin: 35px auto;
+    margin: 14px auto 25px auto;
+
     background: linear-gradient(
         90deg,
         transparent,
@@ -855,80 +864,129 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
 }
 
 @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
 }
 
 /* ===== Grid Layout ===== */
 
 .footer-grid {
-    position: relative;
-    z-index: 2;
-
-    max-width: 1200px;
-    margin: auto;
+    max-width: 1100px;
+    margin: 0 auto 35px auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 50px;
-    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 45px;
 }
-
-.footer-grid div {
-    text-align: left;
-}
-
-/* Column headings */
 
 .footer-grid h4 {
     font-size: 14px;
-    margin-bottom: 14px;
-    color: #ffffff;
+    margin-bottom: 12px;
     font-weight: 600;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
 }
 
-/* Links */
+/* ===== Premium Hover Underline ===== */
 
 .footer-grid a {
-    display: block;
+    position: relative;
+    display: inline-block;
     font-size: 13px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
     color: rgba(255,240,225,0.75);
+    transition: 0.3s ease;
+}
+
+.footer-grid a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 1px;
+    background: #d6a86a;
     transition: 0.3s ease;
 }
 
 .footer-grid a:hover {
     color: #ffffff;
-    transform: translateX(5px);
 }
 
-/* Contact text */
+.footer-grid a:hover::after {
+    width: 100%;
+}
+
+/* ===== Contact ===== */
 
 .footer-contact p {
     font-size: 13px;
-    line-height: 1.7;
+    line-height: 1.6;
+    margin-bottom: 6px;
     color: rgba(255,240,225,0.75);
 }
 
-/* ===== Locate Us ===== */
+/* ===== Glass Map Overlay ===== */
+
+.footer-map {
+    max-width: 1100px;
+    margin: 0 auto 30px auto;
+    position: relative;
+}
 
 .footer-map iframe {
     width: 100%;
-    height: 160px;
-    border-radius: 16px;
+    height: 150px;
+    border-radius: 14px;
     border: 2px solid rgba(255,255,255,0.12);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+}
+
+.footer-map::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.05),
+        rgba(0,0,0,0.15)
+    );
+    pointer-events: none;
 }
 
 /* ===== Bottom ===== */
 
 .footer-bottom {
-    margin-top: 50px;
-    padding-top: 22px;
-    border-top: 1px solid rgba(255,255,255,0.12);
     text-align: center;
     font-size: 12px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.12);
     color: rgba(255,240,225,0.65);
+}
+
+/* ===== Glowing Scroll To Top ===== */
+
+.scroll-top {
+    position: fixed;
+    right: 25px;
+    bottom: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(145deg, #8b5e34, #6e4424);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    transition: 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(214,168,106,0.4);
 }
 
 /* ===== Responsive ===== */
@@ -936,19 +994,20 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
 @media (max-width: 900px) {
 
     .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-
-    .footer-map {
-        grid-column: span 2;
-        margin-top: 20px;
+        grid-template-columns: 1fr;
+        gap: 25px;
     }
 
     .footer-map iframe {
-        height: 180px;
+        height: 170px;
+    }
+
+    .site-footer {
+        padding: 55px 18px 25px;
     }
 }
+
+
 /* ========================= ANIMATIONS ========================== */
 
 .fade-in {
