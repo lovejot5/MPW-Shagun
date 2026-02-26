@@ -159,14 +159,35 @@ function initStatsCounter() {
 
 /* ================= PARALLAX SHAPES ================= */
 function initParallax() {
+    // Disable on mobile devices
+    if (window.innerWidth < 992) return;
+
     const shape1 = document.querySelector(".shape1");
     const shape2 = document.querySelector(".shape2");
 
-    window.addEventListener("scroll", () => {
+    if (!shape1 && !shape2) return;
+
+    let ticking = false;
+
+    function update() {
         const scroll = window.scrollY;
 
-        if (shape1) shape1.style.transform = `translateY(${scroll * 0.08}px)`;
-        if (shape2) shape2.style.transform = `translateY(${scroll * -0.06}px)`;
+        if (shape1) {
+            shape1.style.transform = `translate3d(0, ${scroll * 0.04}px, 0)`;
+        }
+
+        if (shape2) {
+            shape2.style.transform = `translate3d(0, ${scroll * -0.03}px, 0)`;
+        }
+
+        ticking = false;
+    }
+
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+        }
     });
 }
 
