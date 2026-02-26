@@ -1,41 +1,26 @@
-/* =======================================================================
-   MASTER STYLESHEET
-   Government Polytechnic College
-   Complete System (All Pages + Automations + Embeds)
-======================================================================= */
-
-
-/* ========================= ROOT VARIABLES ========================== */
-
 :root {
-    --bg-main: #e9e1d6;
-    --bg-header: #d8cbb8;
-    --bg-card: rgba(255,255,255,0.95);
+    --bg-main: #eef2f7;
+    --bg-header: rgba(255,255,255,0.6);
+    --bg-card: rgba(255,255,255,0.65);
 
-    --accent: #7b4b1f;
-    --accent-soft: #f2e7da;
-    --accent-dark: #5a3414;
+    --accent: #5f8cff;
+    --accent-soft: #e8f0ff;
+    --accent-dark: #3f6fe0;
 
-    --text-dark: #222;
-    --text-light: #666;
-    --text-muted: #888;
+    --text-dark: #1f2933;
+    --text-light: #6b7280;
+    --text-muted: #9ca3af;
 
-    --success: #2e7d32;
-    --danger: #c62828;
-    --warning: #ed6c02;
-    --info: #0288d1;
+    --shadow-soft: 0 8px 20px rgba(0,0,0,0.04);
+    --shadow-medium: 0 20px 50px rgba(0,0,0,0.06);
+    --shadow-strong: 0 30px 80px rgba(0,0,0,0.1);
 
-    --shadow-soft: 0 8px 20px rgba(0,0,0,0.05);
-    --shadow-medium: 0 20px 50px rgba(0,0,0,0.08);
-    --shadow-strong: 0 30px 80px rgba(0,0,0,0.12);
-
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 18px;
+    --radius-sm: 10px;
+    --radius-md: 18px;
+    --radius-lg: 28px;
 
     --transition: 0.3s ease;
 }
-
 
 /* ========================= GLOBAL RESET ========================== */
 
@@ -51,7 +36,12 @@ html {
 
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(180deg, #efe3d3 0%, #e3d5c3 100%);
+    background: linear-gradient(
+    135deg,
+    #eef1f5 0%,
+    #e6ebf2 40%,
+    #dde3ec 100%
+);
     color: var(--text-dark);
     line-height: 1.7;
     overflow-x: hidden;
@@ -119,7 +109,9 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background: var(--bg-header);
+    background: rgba(255,255,255,0.6);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -378,14 +370,21 @@ body.menu-open .page-content {
 .hero-content {
     max-width: 850px;
     padding: 60px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px);
+    border-radius: 28px;
+
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+
+    border: 1px solid rgba(255,255,255,0.65);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,0.06),
+        0 4px 12px rgba(0,0,0,0.04);
+
     text-align: center;
-    box-shadow: var(--shadow-medium);
     animation: fadeUp 0.8s ease forwards;
 }
-
 .hero-content h1 {
     font-size: 38px;
     margin-bottom: 20px;
@@ -669,10 +668,18 @@ margin-left: 6px;
 }
 
 .btn-primary {
-    background: var(--accent);
+    background: linear-gradient(135deg, #5f8cff, #7aa6ff);
     color: white;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(95,140,255,0.35);
+    transition: 0.3s ease;
 }
 
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(95,140,255,0.4);
+}
 .btn-primary:hover {
     background: var(--accent-dark);
 }
@@ -897,7 +904,7 @@ margin-left: 6px;
     position: fixed;
     width: 260px;
     height: 260px;
-    background: radial-gradient(circle, rgba(123,75,31,0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(95,140,255,0.2) 0%, transparent 70%);
     pointer-events: none;
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -1013,5 +1020,16 @@ margin-left: 6px;
     transform: translateY(0);
 }
 
+/* ================= BACKGROUND GLOW ================= */
 
-
+body::before {
+    content: "";
+    position: fixed;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(95,140,255,0.15), transparent 70%);
+    filter: blur(120px);
+    z-index: -1;
+}
