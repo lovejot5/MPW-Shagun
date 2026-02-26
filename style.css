@@ -739,8 +739,8 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     animation: gradientShift 12s ease infinite;
 
     color: #f1e9df;
-    padding: 65px 20px 30px;
-    margin-top: 100px;
+    padding: 45px 20px 20px;   /* reduced */
+    margin-top: 80px;    
 
     border-top: 1px solid rgba(255,255,255,0.08);
     box-shadow: 0 -12px 55px rgba(0,0,0,0.35);
@@ -794,8 +794,10 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
 .footer-top,
 .footer-grid,
 .footer-bottom {
-    position: relative;
-    z-index: 2;
+    text-align: center;
+    font-size: 12px;
+    padding-top: 12px;
+    color: rgba(255,240,225,0.65);
 }
 
 /* ===== Top Branding ===== */
@@ -925,11 +927,16 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
 .footer-bottom {
     text-align: center;
     font-size: 12px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 12px;
     color: rgba(255,240,225,0.65);
 }
 
+.project-credit {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: rgba(255,240,225,0.55);
+}
 /* ===== Responsive Layout ===== */
 
 @media (max-width: 900px) {
