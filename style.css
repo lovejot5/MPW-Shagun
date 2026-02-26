@@ -928,29 +928,45 @@ margin-left: 6px;
     border-radius: 20px;
 }
 
+/* ================= FLOATING SHAPES (GREY VERSION) ================= */
+
 .shape1,
 .shape2 {
     position: absolute;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(123,75,31,0.12), transparent);
+    background: radial-gradient(circle, rgba(255,255,255,0.06), transparent);
     border-radius: 50%;
     z-index: -1;
 }
+
+
+/* ================= STATS STRIP (PREMIUM GREY) ================= */
 
 .stats-strip {
     position: relative;
     width: 100%;
     padding: 80px 20px;
+
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 30px;
-    text-align: center;
-    color: white;
 
-    background: linear-gradient(90deg, #7b4b1f, #5a3414);
+    text-align: center;
+    color: #ffffff;
+
+    background: linear-gradient(
+        135deg,
+        #2c2f33 0%,
+        #3a3f45 40%,
+        #4a4f55 100%
+    );
 }
+
+
+/* ================= WAVE TOP & BOTTOM ================= */
+
 .stats-strip::before,
 .stats-strip::after {
     content: "";
@@ -966,7 +982,7 @@ margin-left: 6px;
     top: -80px;
     background-image: url("data:image/svg+xml;utf8,\
 <svg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'>\
-<path fill='%237b4b1f' d='M0,192L60,186.7C120,181,240,171,360,160C480,149,600,139,720,154.7C840,171,960,213,1080,224C1200,235,1320,213,1380,202.7L1440,192V320H0Z'></path></svg>");
+<path fill='%232c2f33' d='M0,192L60,186.7C120,181,240,171,360,160C480,149,600,139,720,154.7C840,171,960,213,1080,224C1200,235,1320,213,1380,202.7L1440,192V320H0Z'></path></svg>");
 }
 
 .stats-strip::after {
@@ -974,12 +990,22 @@ margin-left: 6px;
     transform: rotate(180deg);
     background-image: url("data:image/svg+xml;utf8,\
 <svg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'>\
-<path fill='%235a3414' d='M0,192L60,186.7C120,181,240,171,360,160C480,149,600,139,720,154.7C840,171,960,213,1080,224C1200,235,1320,213,1380,202.7L1440,192V320H0Z'></path></svg>");
+<path fill='%234a4f55' d='M0,192L60,186.7C120,181,240,171,360,160C480,149,600,139,720,154.7C840,171,960,213,1080,224C1200,235,1320,213,1380,202.7L1440,192V320H0Z'></path></svg>");
 }
+
+
+/* ================= STATS TEXT ================= */
+
 .stat-number {
     font-size: 36px;
     font-weight: 700;
+    color: #ffffff;
 }
+
+.stats-strip p {
+    color: rgba(255,255,255,0.75);
+}
+
 .page-content {
     position: relative;   /* REQUIRED for stacking context */
     z-index: 1;           /* Recommended for safety */
