@@ -2,31 +2,37 @@
     {
         "title": "Admissions Open for Session 2025–26",
         "date": "2025-02-18",
+        "link": "notices/admissions-2025.html",
         "isNew": true
     },
     {
         "title": "Diploma Examination Schedule Released",
         "date": "2025-02-15",
+        "link": "notices/exam-schedule-2025.html",
         "isNew": true
     },
     {
         "title": "Internship Drive for Final Year Students",
         "date": "2025-02-10",
+        "link": "notices/internship-drive.html",
         "isNew": false
     },
     {
         "title": "Scholarship Forms Now Available",
         "date": "2025-02-05",
+        "link": "notices/scholarship-forms.html",
         "isNew": false
     },
     {
         "title": "AI & Robotics Workshop on 10 March",
         "date": "2025-02-01",
+        "link": "notices/ai-workshop.html",
         "isNew": false
     },
     {
         "title": "Campus Placement Orientation Program",
         "date": "2025-01-28",
+        "link": "notices/placement-orientation.html",
         "isNew": false
     }
 ]
