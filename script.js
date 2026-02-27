@@ -1,6 +1,6 @@
 /* ======================================================================
    MASTER SCRIPT FILE: Government Polytechnic College
-   Premium Modern Interactive System
+   Clean Stable Version (Index Optimized)
 ====================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Animations */
     initScrollReveal();
-    initCounters();
     initStatsCounter();
     initParallax();
     initMagneticButtons();
@@ -24,10 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
     initBackToTop();
     initSmoothScroll();
     initImageModal();
-    initNewsAutoScroll();
+    initNewsSystem();
+    initSlider();
 });
 
-/* ================= HEADER SCROLL + BLUR ================= */
+
+/* ================= HEADER SCROLL ================= */
 function initHeaderScroll() {
     const header = document.querySelector("header");
     if (!header) return;
@@ -36,6 +37,7 @@ function initHeaderScroll() {
         header.classList.toggle("scrolled", window.scrollY > 40);
     });
 }
+
 
 /* ================= MOBILE MENU ================= */
 function initMobileMenu() {
@@ -59,19 +61,13 @@ function initMobileMenu() {
         document.body.classList.remove("menu-open");
     }
 
-    menuBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
+    menuBtn.addEventListener("click", () => {
         menu.classList.contains("active") ? closeMenu() : openMenu();
     });
 
-    document.addEventListener("click", (e) => {
-        if (
-            menu.classList.contains("active") &&
-            !menu.contains(e.target) &&
-            !menuBtn.contains(e.target)
-        ) closeMenu();
-    });
+    overlay.addEventListener("click", closeMenu);
 }
+
 
 /* ================= ACTIVE NAV ================= */
 function setActiveNav() {
@@ -82,6 +78,7 @@ function setActiveNav() {
         link.classList.toggle("active", link.getAttribute("href") === current);
     });
 }
+
 
 /* ================= SCROLL REVEAL ================= */
 function initScrollReveal() {
@@ -98,69 +95,48 @@ function initScrollReveal() {
     elements.forEach(el => observer.observe(el));
 }
 
-/* ================= GENERAL COUNTERS ================= */
-function initCounters() {
-    const counters = document.querySelectorAll(".counter");
 
-    counters.forEach(counter => {
-        const target = +counter.dataset.target;
-        let count = 0;
-
-        const update = () => {
-            const increment = target / 100;
-            if (count < target) {
-                count += increment;
-                counter.innerText = Math.ceil(count);
-                requestAnimationFrame(update);
-            } else {
-                counter.innerText = target;
-            }
-        };
-
-        const observer = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting) {
-                update();
-                observer.disconnect();
-            }
-        });
-
-        observer.observe(counter);
-    });
-}
-
-/* ================= STATS STRIP COUNTER ================= */
+/* ================= STATS COUNTER ================= */
 function initStatsCounter() {
     const stats = document.querySelectorAll(".stat-number");
+    if (!stats.length) return;
 
-    stats.forEach(stat => {
-        const target = +stat.dataset.target;
-        let count = 0;
+    const observer = new IntersectionObserver(entries => {
 
-        const animate = () => {
-            const increment = target / 80;
-            if (count < target) {
-                count += increment;
-                stat.innerText = Math.ceil(count);
-                requestAnimationFrame(animate);
-            } else {
-                stat.innerText = target + "+";
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            const stat = entry.target;
+            const target = parseInt(stat.dataset.target);
+            const duration = 1500;
+            const startTime = performance.now();
+
+            function animate(time) {
+                const progress = Math.min((time - startTime) / duration, 1);
+                const value = Math.floor(progress * target);
+
+                stat.textContent = value;
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    stat.textContent = target + "+";
+                }
             }
-        };
 
-        const observer = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting) {
-                animate();
-                observer.disconnect();
-            }
+            requestAnimationFrame(animate);
+            observer.unobserve(stat);
         });
 
-        observer.observe(stat);
-    });
+    }, { threshold: 0.6 });
+
+    stats.forEach(stat => observer.observe(stat));
 }
 
-/* ================= PARALLAX SHAPES ================= */
+
+/* ================= PARALLAX ================= */
 function initParallax() {
-    // Disable on mobile devices
     if (window.innerWidth < 992) return;
 
     const shape1 = document.querySelector(".shape1");
@@ -168,45 +144,31 @@ function initParallax() {
 
     if (!shape1 && !shape2) return;
 
-    let ticking = false;
-
-    function update() {
+    window.addEventListener("scroll", () => {
         const scroll = window.scrollY;
 
-        if (shape1) {
-            shape1.style.transform = `translate3d(0, ${scroll * 0.04}px, 0)`;
-        }
-
-        if (shape2) {
-            shape2.style.transform = `translate3d(0, ${scroll * -0.03}px, 0)`;
-        }
-
-        ticking = false;
-    }
-
-    window.addEventListener("scroll", () => {
-        if (!ticking) {
-            requestAnimationFrame(update);
-            ticking = true;
-        }
+        if (shape1) shape1.style.transform = `translateY(${scroll * 0.04}px)`;
+        if (shape2) shape2.style.transform = `translateY(${scroll * -0.03}px)`;
     });
 }
+
 
 /* ================= CURSOR GLOW ================= */
 function initCursorGlow() {
     const glow = document.querySelector(".cursor-glow");
     if (!glow) return;
 
-    window.addEventListener("mousemove", (e) => {
+    window.addEventListener("mousemove", e => {
         glow.style.left = e.clientX + "px";
         glow.style.top = e.clientY + "px";
     });
 }
 
-/* ================= MAGNETIC BUTTONS ================= */
+
+/* ================= MAGNETIC BUTTON ================= */
 function initMagneticButtons() {
     document.querySelectorAll(".btn").forEach(btn => {
-        btn.addEventListener("mousemove", (e) => {
+        btn.addEventListener("mousemove", e => {
             const rect = btn.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
@@ -219,6 +181,7 @@ function initMagneticButtons() {
     });
 }
 
+
 /* ================= IMAGE MODAL ================= */
 function initImageModal() {
     const modal = document.getElementById("imageModal");
@@ -226,7 +189,7 @@ function initImageModal() {
 
     if (!modal || !modalImg) return;
 
-    document.querySelectorAll(".gallery-track img").forEach(img => {
+    document.querySelectorAll(".slide").forEach(img => {
         img.addEventListener("click", () => {
             modal.classList.add("active");
             modalImg.src = img.src;
@@ -238,16 +201,19 @@ function initImageModal() {
     });
 }
 
+
 /* ================= FAQ ================= */
 function initFAQ() {
     document.querySelectorAll(".faq-question").forEach(btn => {
         btn.addEventListener("click", () => {
             const item = btn.parentElement;
-            document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
+            document.querySelectorAll(".faq-item")
+                .forEach(i => i.classList.remove("active"));
             item.classList.toggle("active");
         });
     });
 }
+
 
 /* ================= CONTACT FORM ================= */
 function initContactForm() {
@@ -261,72 +227,48 @@ function initContactForm() {
     });
 }
 
+
 /* ================= BACK TO TOP ================= */
 function initBackToTop() {
-    const btn = document.createElement("button");
-    btn.innerHTML = "↑";
-    btn.className = "back-to-top";
-
-    Object.assign(btn.style, {
-        position: "fixed",
-        bottom: "30px",
-        right: "30px",
-        width: "50px",
-        height: "50px",
-        borderRadius: "50%",
-        background: "#7b4b1f",
-        color: "white",
-        border: "none",
-        cursor: "pointer",
-        display: "none",
-        zIndex: "999"
-    });
-
-    document.body.appendChild(btn);
+    const btn = document.querySelector(".scroll-top");
+    if (!btn) return;
 
     window.addEventListener("scroll", () => {
         btn.style.display = window.scrollY > 400 ? "flex" : "none";
-        btn.style.alignItems = "center";
-        btn.style.justifyContent = "center";
-    });
-
-    btn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
 
-/* ================= SMOOTH ANCHOR SCROLL ================= */
+
+/* ================= SMOOTH SCROLL ================= */
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", function (e) {
-            const targetId = this.getAttribute("href");
-            if (targetId === "#") return;
-
-            const target = document.querySelector(targetId);
+            const target = document.querySelector(this.getAttribute("href"));
             if (!target) return;
-
             e.preventDefault();
-
-            const offset = target.offsetTop - 80;
-            window.scrollTo({ top: offset, behavior: "smooth" });
+            window.scrollTo({
+                top: target.offsetTop - 80,
+                behavior: "smooth"
+            });
         });
     });
 }
 
+
 /* ================= PAGE PRELOADER ================= */
 window.addEventListener("load", () => {
     const preloader = document.querySelector(".preloader");
-    if (!preloader) return;
-
-    preloader.style.opacity = "0";
-    setTimeout(() => preloader.style.display = "none", 600);
+    if (preloader) {
+        preloader.style.opacity = "0";
+        setTimeout(() => preloader.style.display = "none", 600);
+    }
 
     const page = document.querySelector(".page-content");
     if (page) page.classList.add("loaded");
 });
 
-/* ================= DYNAMIC NEWS SYSTEM ================= */
 
+/* ================= CLEAN DYNAMIC NEWS SYSTEM ================= */
 function initNewsSystem() {
 
     const container = document.querySelector(".latest-news-container");
@@ -338,216 +280,116 @@ function initNewsSystem() {
         .then(res => res.json())
         .then(data => {
 
-            // Sort newest first
             data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            // Render items
-            data.forEach(item => {
-                const li = document.createElement("li");
+            renderNews(data, list);
+            renderNews(data, list); // duplicate for infinite loop
 
-                const date = new Date(item.date).toLocaleDateString("en-IN", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric"
-                });
-
-                li.innerHTML = `
-                    <span class="news-title">${item.title}</span>
-                    <span class="news-date">${date}</span>
-                `;
-
-                if (item.isNew) {
-                    li.setAttribute("data-new", "true");
-                }
-
-                list.appendChild(li);
-            });
-
-            // Duplicate for infinite loop
-            list.innerHTML += list.innerHTML;
-
-            startAutoScroll(container);
+            startInfiniteScroll(container);
         })
-        .catch(err => {
-            console.error("News loading failed:", err);
-        });
+        .catch(err => console.error("News loading failed:", err));
 }
 
+function renderNews(data, list) {
+    data.forEach(item => {
 
-/* ================= SMOOTH INFINITE AUTO SCROLL ================= */
+        const li = document.createElement("li");
 
-function startAutoScroll(container) {
+        const date = new Date(item.date).toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
 
-    let scrollSpeed = 0.5;  // smooth
-    let isPaused = false;
+        li.innerHTML = `
+            <span class="news-title">${item.title}</span>
+            <span class="news-date">${date}</span>
+        `;
 
-    function step() {
-        if (!isPaused) {
-            container.scrollTop += scrollSpeed;
-
-            if (container.scrollTop >= container.scrollHeight / 2) {
-                container.scrollTop = 0;
-            }
+        if (item.isNew) {
+            li.setAttribute("data-new", "true");
         }
 
-        requestAnimationFrame(step);
-    }
-
-    requestAnimationFrame(step);
-
-    /* Pause on hover */
-    container.addEventListener("mouseenter", () => isPaused = true);
-    container.addEventListener("mouseleave", () => isPaused = false);
-
-    /* Pause while manual scrolling */
-    let scrollTimeout;
-
-    container.addEventListener("scroll", () => {
-        isPaused = true;
-        clearTimeout(scrollTimeout);
-
-        scrollTimeout = setTimeout(() => {
-            isPaused = false;
-        }, 1500);
-    });
-
-    /* Touch support */
-    container.addEventListener("touchstart", () => isPaused = true);
-    container.addEventListener("touchend", () => {
-        setTimeout(() => isPaused = false, 1200);
+        list.appendChild(li);
     });
 }
 
-/* ================= SLIDER ================= */
-
-const slides = document.querySelectorAll(".slide");
-const nextBtn = document.querySelector(".next");
-const prevBtn = document.querySelector(".prev");
-
-let current = 0;
-
-function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove("active"));
-    slides[index].classList.add("active");
-}
-
-function nextSlide() {
-    current = (current + 1) % slides.length;
-    showSlide(current);
-}
-
-function prevSlide() {
-    current = (current - 1 + slides.length) % slides.length;
-    showSlide(current);
-}
-
-nextBtn.addEventListener("click", nextSlide);
-prevBtn.addEventListener("click", prevSlide);
-
-/* Autoplay 3 sec */
-setInterval(nextSlide, 3000);
-
-/* Touch Swipe Support */
-let startX = 0;
-
-document.querySelector(".slider").addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-});
-
-document.querySelector(".slider").addEventListener("touchend", e => {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) nextSlide();
-    if (endX - startX > 50) prevSlide();
-});
-
-/* ================= INFINITE NEWS AUTO SCROLL (SMOOTH + TOUCH SAFE) ================= */
-
-function initNewsAutoScroll() {
-
-    const newsBox = document.querySelector(".latest-news-container");
-    if (!newsBox) return;
+function startInfiniteScroll(container) {
 
     let speed = 0.5;
     let paused = false;
 
     function animate() {
-
         if (!paused) {
-            newsBox.scrollTop += speed;
+            container.scrollTop += speed;
 
-            // seamless infinite loop (duplicate content required)
-            if (newsBox.scrollTop >= newsBox.scrollHeight / 2) {
-                newsBox.scrollTop = 0;
+            if (container.scrollTop >= container.scrollHeight / 2) {
+                container.scrollTop = 0;
             }
         }
-
         requestAnimationFrame(animate);
     }
 
     requestAnimationFrame(animate);
 
-    /* ---- Pause on interaction ---- */
+    container.addEventListener("mouseenter", () => paused = true);
+    container.addEventListener("mouseleave", () => paused = false);
 
-    newsBox.addEventListener("mouseenter", () => paused = true);
-    newsBox.addEventListener("mouseleave", () => paused = false);
-
-    newsBox.addEventListener("touchstart", () => paused = true);
-    newsBox.addEventListener("touchend", () => {
-        setTimeout(() => paused = false, 1500);
+    container.addEventListener("touchstart", () => paused = true);
+    container.addEventListener("touchend", () => {
+        setTimeout(() => paused = false, 1200);
     });
 
-    let scrollTimeout;
-
-    newsBox.addEventListener("scroll", () => {
+    let timeout;
+    container.addEventListener("scroll", () => {
         paused = true;
-        clearTimeout(scrollTimeout);
-
-        scrollTimeout = setTimeout(() => {
-            paused = false;
-        }, 1500);
+        clearTimeout(timeout);
+        timeout = setTimeout(() => paused = false, 1500);
     });
 }
 
 
-/* ================= IMPROVED COUNTER ANIMATION ================= */
+/* ================= SLIDER ================= */
+function initSlider() {
 
-function initStatCounters() {
+    const slides = document.querySelectorAll(".slide");
+    const nextBtn = document.querySelector(".next");
+    const prevBtn = document.querySelector(".prev");
 
-    const counters = document.querySelectorAll(".stat-number");
-    if (!counters.length) return;
+    if (!slides.length) return;
 
-    const observer = new IntersectionObserver(entries => {
+    let current = 0;
 
-        entries.forEach(entry => {
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        slides[index].classList.add("active");
+    }
 
-            if (!entry.isIntersecting) return;
+    function nextSlide() {
+        current = (current + 1) % slides.length;
+        showSlide(current);
+    }
 
-            const counter = entry.target;
-            const target = parseInt(counter.dataset.target);
-            let current = 0;
+    function prevSlide() {
+        current = (current - 1 + slides.length) % slides.length;
+        showSlide(current);
+    }
 
-            const duration = 1500; // ms
-            const startTime = performance.now();
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
 
-            function update(time) {
+    setInterval(nextSlide, 4000);
 
-                const progress = Math.min((time - startTime) / duration, 1);
-                current = Math.floor(progress * target);
+    let startX = 0;
+    const slider = document.querySelector(".slider");
 
-                counter.textContent = current;
+    slider.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+    });
 
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                } else {
-                    counter.textContent = target + "+";
-                }
-            }
-
-            requestAnimationFrame(update);
-            observer.unobserve(counter);
-        });
-
-    }, { threshold: 0.6 });
-
-    counters.forEach(counter => observer.observe(counter));
+    slider.addEventListener("touchend", e => {
+        let endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50) nextSlide();
+        if (endX - startX > 50) prevSlide();
+    });
 }
