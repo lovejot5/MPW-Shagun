@@ -564,8 +564,8 @@ section {
 .latest-news-container {
     max-height: 240px;
     overflow-y: auto;
-    position: relative;
     scroll-behavior: smooth;
+    position: relative;
 }
 
 .latest-news-list li {
@@ -586,11 +586,11 @@ section {
     opacity: 0.6;
 }
 
-/* Brown NEW badge */
+/* Clean institutional NEW badge */
 .latest-news-list li[data-new="true"] .news-title::after {
     content: " NEW";
     margin-left: 10px;
-    padding: 3px 10px;
+    padding: 4px 12px;
     font-size: 11px;
     font-weight: 600;
     border-radius: 20px;
