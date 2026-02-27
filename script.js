@@ -324,12 +324,13 @@ function renderNews(data, list) {
 
 function autoScroll(container) {
 
-    let speed = 0.6;
+    let speed = 0.5;
     let pause = false;
 
     function step() {
 
-        if (!pause) {
+        if (!pause && container.scrollHeight > container.clientHeight) {
+
             container.scrollTop += speed;
 
             if (container.scrollTop >= container.scrollHeight / 2) {
@@ -340,7 +341,10 @@ function autoScroll(container) {
         requestAnimationFrame(step);
     }
 
-    requestAnimationFrame(step);
+    // Delay start slightly to ensure height calculation
+    setTimeout(() => {
+        requestAnimationFrame(step);
+    }, 300);
 
     container.addEventListener("mouseenter", () => pause = true);
     container.addEventListener("mouseleave", () => pause = false);
@@ -357,7 +361,6 @@ function autoScroll(container) {
         timeout = setTimeout(() => pause = false, 1500);
     });
 }
-
 /* ================= SLIDER ================= */
 function initSlider() {
 
