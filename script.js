@@ -454,7 +454,7 @@ function initNotices() {
     const container = document.getElementById("noticeContainer");
     if (!container) return;
 
-    fetch("MPW-Shagun/data/notices.json")
+    fetch("data/notices.json")
         .then(res => res.json())
         .then(data => {
 
