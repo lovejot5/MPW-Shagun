@@ -715,49 +715,126 @@ section {
     margin-bottom: 18px;
 }
 
-/* ========================= NOTICES ========================== */
+/* ================= DISCORD EMBED STYLE NOTICES ================= */
 
-.notice-card {
-    background: white;
-    padding: 30px;
-    border-radius: var(--radius-md);
-    margin-bottom: 25px;
-    box-shadow: var(--shadow-soft);
+.notice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
 }
 
-.notice-header {
+/* Main Card */
+.notice-embed {
+    position: relative;
+    background: rgba(255,255,255,0.92);
+    border-radius: 16px;
+    padding: 20px 22px 18px 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    border-left: 5px solid var(--accent);
+    transition: 0.3s ease;
+}
+
+.notice-embed:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+}
+
+/* Header Row */
+.notice-top {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-.notice-header img {
-    width: 40px;
-    height: 40px;
+.notice-top img {
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
+    object-fit: cover;
+}
+
+.notice-author {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
 }
 
 .notice-category {
-    font-size: 12px;
+    font-size: 11px;
+    background: rgba(107,63,35,0.1);
     color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: auto;
+}
+
+/* Title */
+.notice-title {
+    font-size: 17px;
     font-weight: 600;
+    margin-bottom: 6px;
 }
 
+/* Date */
+.notice-date {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* Description */
+.notice-description {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+/* Image */
 .notice-image {
-    margin-top: 15px;
-    border-radius: var(--radius-md);
+    margin-top: 10px;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
+.notice-image img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* Buttons */
 .notice-buttons {
-    margin-top: 15px;
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.notice-buttons a {
-    display: inline-block;
-    margin-right: 10px;
+.notice-btn {
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: white;
+    transition: 0.3s ease;
 }
 
+.notice-btn:hover {
+    background: var(--accent-dark);
+}
+
+/* NEW badge */
+.notice-new {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 10px;
+    padding: 4px 8px;
+    background: var(--accent);
+    color: white;
+    border-radius: 20px;
+}
 
 /* ================= PREMIUM FAQ ================= */
 
