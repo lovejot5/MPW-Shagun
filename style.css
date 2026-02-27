@@ -728,9 +728,8 @@ section {
     position: relative;
     background: rgba(255,255,255,0.92);
     border-radius: 16px;
-    padding: 20px 22px 18px 22px;
+    padding: 22px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    border-left: 5px solid var(--accent);
     transition: 0.3s ease;
 }
 
@@ -813,15 +812,24 @@ section {
 
 .notice-btn {
     font-size: 13px;
-    padding: 7px 14px;
-    border-radius: 10px;
-    background: var(--accent);
+    padding: 9px 18px;
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #a6784d,
+        #8b5e34
+    );
+
+    box-shadow: 0 10px 25px rgba(139,94,52,0.35);
+
     color: white;
     transition: 0.3s ease;
 }
 
 .notice-btn:hover {
-    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(139,94,52,0.45);
 }
 
 /* NEW badge */
