@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initBackToTop();
     initSmoothScroll();
     initImageModal();
+    initNewsSystem();
 });
 
 /* ================= HEADER SCROLL + BLUR ================= */
@@ -323,3 +324,96 @@ window.addEventListener("load", () => {
     const page = document.querySelector(".page-content");
     if (page) page.classList.add("loaded");
 });
+
+/* ================= DYNAMIC NEWS SYSTEM ================= */
+
+function initNewsSystem() {
+
+    const container = document.querySelector(".latest-news-container");
+    const list = document.querySelector(".latest-news-list");
+
+    if (!container || !list) return;
+
+    fetch("data/news.json")
+        .then(res => res.json())
+        .then(data => {
+
+            // Sort newest first
+            data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Render items
+            data.forEach(item => {
+                const li = document.createElement("li");
+
+                const date = new Date(item.date).toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                });
+
+                li.innerHTML = `
+                    <span class="news-title">${item.title}</span>
+                    <span class="news-date">${date}</span>
+                `;
+
+                if (item.isNew) {
+                    li.setAttribute("data-new", "true");
+                }
+
+                list.appendChild(li);
+            });
+
+            // Duplicate for infinite loop
+            list.innerHTML += list.innerHTML;
+
+            startAutoScroll(container);
+        })
+        .catch(err => {
+            console.error("News loading failed:", err);
+        });
+}
+
+
+/* ================= SMOOTH INFINITE AUTO SCROLL ================= */
+
+function startAutoScroll(container) {
+
+    let scrollSpeed = 0.5;  // smooth
+    let isPaused = false;
+
+    function step() {
+        if (!isPaused) {
+            container.scrollTop += scrollSpeed;
+
+            if (container.scrollTop >= container.scrollHeight / 2) {
+                container.scrollTop = 0;
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+
+    /* Pause on hover */
+    container.addEventListener("mouseenter", () => isPaused = true);
+    container.addEventListener("mouseleave", () => isPaused = false);
+
+    /* Pause while manual scrolling */
+    let scrollTimeout;
+
+    container.addEventListener("scroll", () => {
+        isPaused = true;
+        clearTimeout(scrollTimeout);
+
+        scrollTimeout = setTimeout(() => {
+            isPaused = false;
+        }, 1500);
+    });
+
+    /* Touch support */
+    container.addEventListener("touchstart", () => isPaused = true);
+    container.addEventListener("touchend", () => {
+        setTimeout(() => isPaused = false, 1200);
+    });
+}
