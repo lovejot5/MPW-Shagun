@@ -268,7 +268,8 @@ window.addEventListener("load", () => {
 });
 
 
-/* ================= CLEAN DYNAMIC NEWS SYSTEM ================= */
+/* ================= WORKING AUTO NEWS ================= */
+
 function initNewsSystem() {
 
     const container = document.querySelector(".latest-news-container");
@@ -283,14 +284,18 @@ function initNewsSystem() {
             data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             renderNews(data, list);
-            renderNews(data, list); // duplicate for infinite loop
 
-            startInfiniteScroll(container);
+            // Duplicate content for infinite loop
+            list.innerHTML += list.innerHTML;
+
+            autoScroll(container);
         })
         .catch(err => console.error("News loading failed:", err));
 }
 
+
 function renderNews(data, list) {
+
     data.forEach(item => {
 
         const li = document.createElement("li");
@@ -314,40 +319,42 @@ function renderNews(data, list) {
     });
 }
 
-function startInfiniteScroll(container) {
 
-    let speed = 0.5;
-    let paused = false;
+function autoScroll(container) {
 
-    function animate() {
-        if (!paused) {
+    let speed = 0.6;
+    let pause = false;
+
+    function step() {
+
+        if (!pause) {
             container.scrollTop += speed;
 
             if (container.scrollTop >= container.scrollHeight / 2) {
                 container.scrollTop = 0;
             }
         }
-        requestAnimationFrame(animate);
+
+        requestAnimationFrame(step);
     }
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(step);
 
-    container.addEventListener("mouseenter", () => paused = true);
-    container.addEventListener("mouseleave", () => paused = false);
+    container.addEventListener("mouseenter", () => pause = true);
+    container.addEventListener("mouseleave", () => pause = false);
 
-    container.addEventListener("touchstart", () => paused = true);
+    container.addEventListener("touchstart", () => pause = true);
     container.addEventListener("touchend", () => {
-        setTimeout(() => paused = false, 1200);
+        setTimeout(() => pause = false, 1200);
     });
 
     let timeout;
     container.addEventListener("scroll", () => {
-        paused = true;
+        pause = true;
         clearTimeout(timeout);
-        timeout = setTimeout(() => paused = false, 1500);
+        timeout = setTimeout(() => pause = false, 1500);
     });
 }
-
 
 /* ================= SLIDER ================= */
 function initSlider() {
