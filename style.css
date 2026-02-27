@@ -1142,8 +1142,8 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
 }
 
 .reveal {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
     transition: 0.7s cubic-bezier(.19,1,.22,1);
 }
 
