@@ -307,8 +307,10 @@ function renderNews(data, list) {
         });
 
         li.innerHTML = `
-            <span class="news-title">${item.title}</span>
-            <span class="news-date">${date}</span>
+            <a href="${item.link || '#'}" class="news-link">
+                <span class="news-title">${item.title}</span>
+                <span class="news-date">${date}</span>
+            </a>
         `;
 
         if (item.isNew) {
