@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Components */
     initFAQ();
-    initContactForm();
+    initContactAjax();
     initBackToTop();
     initSmoothScroll();
     initImageModal();
@@ -214,20 +214,75 @@ function initFAQ() {
     });
 }
 
+/* ================= CONTACT FORM AJAX ================= */
 
-/* ================= CONTACT FORM ================= */
-function initContactForm() {
-    const form = document.querySelector(".contact-form");
+function initContactAjax() {
+
+    const form = document.getElementById("contactForm");
     if (!form) return;
 
-    form.addEventListener("submit", e => {
+    const button = form.querySelector("button");
+    const btnText = button.querySelector(".btn-text");
+    const spinner = button.querySelector(".spinner");
+
+    form.addEventListener("submit", async function(e) {
+
         e.preventDefault();
-        alert("Message sent successfully.");
-        form.reset();
+
+        btnText.style.display = "none";
+        spinner.style.display = "inline-block";
+        button.disabled = true;
+
+        const formData = new FormData(form);
+
+        try {
+
+            const response = await fetch("https://formspree.io/f/mqedjyar", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+
+                form.reset();
+                showToast("Message sent successfully ✔");
+
+            } else {
+                showToast("Something went wrong. Please try again.");
+            }
+
+        } catch (error) {
+            showToast("Network error. Try again.");
+        }
+
+        btnText.style.display = "inline";
+        spinner.style.display = "none";
+        button.disabled = false;
+
     });
 }
 
 
+/* ================= TOAST FUNCTION ================= */
+
+function showToast(message) {
+
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add("show"), 100);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 400);
+    }, 3000);
+}
 /* ================= BACK TO TOP ================= */
 function initBackToTop() {
     const btn = document.querySelector(".scroll-top");
