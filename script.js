@@ -481,11 +481,12 @@ function initNotices() {
                     </div>
 
                     <div class="notice-title">${notice.title}</div>
-                    <div class="notice-date">${date}</div>
 
-                    <div class="notice-description">
-                        ${notice.description}
-                    </div>
+<div class="notice-description">
+    ${notice.description}
+</div>
+
+<div class="notice-date">${date}</div>
 
                     ${
                         notice.images && notice.images.length
