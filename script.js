@@ -269,7 +269,7 @@ window.addEventListener("load", () => {
 
 
 /* ================= WORKING AUTO NEWS ================= */
-/* ================= STABLE AUTO + MANUAL NEWS SCROLL ================= */
+/* ================= FINAL AUTO + MANUAL NEWS SYSTEM ================= */
 
 function initNewsSystem() {
 
@@ -282,11 +282,12 @@ function initNewsSystem() {
         .then(res => res.json())
         .then(data => {
 
+            // Sort newest first
             data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             renderNews(data, list);
 
-            // Duplicate content for infinite scroll
+            // Duplicate once for seamless infinite scroll
             list.innerHTML += list.innerHTML;
 
             startAutoScroll(container);
@@ -327,16 +328,17 @@ function renderNews(data, list) {
 
 function startAutoScroll(container) {
 
-    let speed = 0.5;
+    let speed = 0.5;              // adjust scroll speed here
     let pause = false;
-    let userScrolling = false;
+    let userInteracting = false;
 
     function animate() {
 
-        if (!pause && !userScrolling && container.scrollHeight > container.clientHeight) {
+        if (!pause && !userInteracting && container.scrollHeight > container.clientHeight) {
 
             container.scrollTop += speed;
 
+            // Infinite loop reset (because content duplicated)
             if (container.scrollTop >= container.scrollHeight / 2) {
                 container.scrollTop = 0;
             }
@@ -351,26 +353,29 @@ function startAutoScroll(container) {
     container.addEventListener("mouseenter", () => pause = true);
     container.addEventListener("mouseleave", () => pause = false);
 
-    /* Detect REAL user scroll only */
+    /* Detect REAL manual scroll (mouse wheel only) */
     container.addEventListener("wheel", () => {
-        userScrolling = true;
-        resetUserScrolling();
+        userInteracting = true;
+        resetInteraction();
     });
 
+    /* Mobile touch support */
     container.addEventListener("touchstart", () => {
-        userScrolling = true;
+        userInteracting = true;
     });
 
     container.addEventListener("touchend", () => {
-        resetUserScrolling();
+        resetInteraction();
     });
 
-    function resetUserScrolling() {
+    function resetInteraction() {
         setTimeout(() => {
-            userScrolling = false;
+            userInteracting = false;
         }, 1500);
     }
 }
+
+
 
 /* ================= SLIDER ================= */
 function initSlider() {
