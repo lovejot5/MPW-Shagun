@@ -592,67 +592,61 @@ section {
     background: rgba(107,63,35,0.15);
     color: var(--accent);
 }
-/* ================= PRINCIPAL MESSAGE - DISCORD EMBED STYLE ================= */
+
+/* ================= PRINCIPAL - DISCORD STYLE PROPORTION ================= */
 
 .principal-card {
     background: #f4efe9;
-    border-radius: 30px;
-    padding: 50px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-radius: 26px;
+    padding: 45px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-/* Author Row */
-
-.principal-author {
+.principal-header {
     display: flex;
     align-items: center;
-    gap: 25px;
-    margin-bottom: 30px;
+    gap: 18px;
+    margin-bottom: 25px;
 }
 
-.principal-author img {
-    width: 110px;
-    height: 110px;
+.principal-header img {
+    width: 64px;          /* Discord-like size */
+    height: 64px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-/* Title like Discord embed header */
-
-.principal-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 8px;
+.principal-meta h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
 }
-
-/* Name + Role Inline */
 
 .principal-name-row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .principal-name {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--accent);
 }
 
 .principal-role {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-muted);
 }
 
-/* Content Text */
-
-.principal-content p {
-    font-size: 16px;
+.principal-content {
+    font-size: 15px;
     line-height: 1.9;
     color: var(--text-light);
+}
+
+.principal-content p {
     margin-bottom: 18px;
-    text-align: left;
 }
 
 /* ========================= NOTICES ========================== */
@@ -1071,21 +1065,20 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     }
 
     .principal-card {
-        flex-direction: column;
-        text-align: center;
+        padding: 30px;
     }
-    
-    .principal-author {
+
+    .principal-header {
         flex-direction: column;
         text-align: center;
     }
 
-    .principal-content p {
-        text-align: left;
+    .principal-name-row {
+        justify-content: center;
     }
 
-    .container-large {
-        padding: 40px;
+    .hero h1 {
+        font-size: 26px;
     }
    
 }
