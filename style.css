@@ -401,38 +401,34 @@ body.menu-open .page-content {
 }
 
 
-/* ================= FULL WIDTH HERO ================= */
+/* ================= HERO CLEAN PROFESSIONAL ================= */
 
 .hero {
     margin-top: 110px;
-    padding: 80px 40px 60px;
+    padding: 60px 20px 40px;
     text-align: center;
-    width: 100%;
-    max-width: 1200px;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .hero h1 {
-    font-size: 36px;
-    font-weight: 700;
-    color: #6b3f23; /* Coffee Brown */
+    font-size: 30px;     /* smaller */
+    font-weight: 600;
+    color: var(--accent);
     position: relative;
-    display: inline-block;
-    margin-bottom: 25px;
+    padding-bottom: 14px;
 }
 
-/* Animated Coffee Gradient Underline */
-
+/* FULL WIDTH ANIMATED UNDERLINE */
 .hero h1::after {
     content: "";
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -12px;
-    width: 120px;
-    height: 4px;
-    border-radius: 20px;
+    left: 0;
+    bottom: 0;
+    width: 100%;          /* full width now */
+    height: 3px;
+    border-radius: 6px;
 
     background: linear-gradient(
         90deg,
@@ -443,7 +439,7 @@ body.menu-open .page-content {
     );
 
     background-size: 300% 100%;
-    animation: coffeeMove 4s linear infinite;
+    animation: coffeeMove 5s linear infinite;
 }
 
 @keyframes coffeeMove {
@@ -452,33 +448,28 @@ body.menu-open .page-content {
 }
 
 .hero-description {
-    font-size: 17px;
-    line-height: 1.9;
+    font-size: 15px;     /* smaller */
+    line-height: 1.8;
     color: var(--text-light);
-    max-width: 950px;
-    margin: 0 auto 18px;
-}
-
-.hero-buttons {
-    margin-top: 25px;
+    margin-bottom: 14px;
 }
 
 /* ========================= CONTAINERS ========================== */
 
 section {
-    padding: 90px 20px;
+    padding: 70px 20px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .container-large {
-    max-width: 1100px;
+    max-width: 1050px;
     margin: auto;
-    background: rgba(255,255,255,0.75);
-    padding: 50px;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+    background: rgba(255,255,255,0.78);
+    padding: 35px 40px;   /* reduced */
+    border-radius: 20px;  /* smaller */
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
 }
 
 
@@ -590,7 +581,7 @@ section {
 /* ================= CLEAN NEWS ================= */
 
 .latest-news-container {
-    max-height: 230px;
+    max-height: 260px;
     overflow-y: auto;
     scroll-behavior: smooth;
     position: relative;
