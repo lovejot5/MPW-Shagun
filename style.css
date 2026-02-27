@@ -867,6 +867,28 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     }
 }
 
+/* ================= RESPONSIVE ================= */
+
+/* Mobile Layout */
+
+@media (max-width: 900px) {
+
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    /* Map below */
+    .footer-map {
+        grid-column: 1 / -1;
+        margin-top: 20px;
+    }
+
+    .footer-map iframe {
+        height: 170px;
+    }
+}
+
 
 /* ========================= ANIMATIONS ========================== */
 
