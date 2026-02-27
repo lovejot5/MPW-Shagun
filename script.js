@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Components */
     initFAQ();
-   initNotices();
+    initNotices();
     initContactAjax();
     initBackToTop();
     initSmoothScroll();
