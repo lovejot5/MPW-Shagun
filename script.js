@@ -518,11 +518,14 @@ function initNotices() {
 /* ================= SLIDER ================= */
 function initSlider() {
 
-    const slides = document.querySelectorAll(".slide");
-    const nextBtn = document.querySelector(".next");
-    const prevBtn = document.querySelector(".prev");
+    const slider = document.querySelector(".slider");
+    if (!slider) return;
 
-    if (!slides.length) return;
+    const slides = slider.querySelectorAll(".slide");
+    const nextBtn = slider.querySelector(".next");
+    const prevBtn = slider.querySelector(".prev");
+
+    if (!slides.length || !nextBtn || !prevBtn) return;
 
     let current = 0;
 
@@ -547,7 +550,6 @@ function initSlider() {
     setInterval(nextSlide, 4000);
 
     let startX = 0;
-    const slider = document.querySelector(".slider");
 
     slider.addEventListener("touchstart", e => {
         startX = e.touches[0].clientX;
