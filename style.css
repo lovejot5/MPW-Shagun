@@ -77,14 +77,14 @@ html, body {
 /* ========================= TYPOGRAPHY ========================== */
 
 h1 { 
-    font-size: 38px;
+    font-size: 35px;
     line-height: 1.2;
 }
 p {
     color: var(--text-light);
 }
 h2 { 
-    font-size: 30px;
+    font-size: 22px;
     font-weight: 600;
 }
 h3 { font-size: 20px; }
@@ -420,32 +420,6 @@ body.menu-open .page-content {
     padding-bottom: 14px;
 }
 
-/* FULL WIDTH ANIMATED UNDERLINE */
-.hero h1::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;          /* full width now */
-    height: 3px;
-    border-radius: 6px;
-
-    background: linear-gradient(
-        90deg,
-        #6b3f23,
-        #a6784d,
-        #8b5e34,
-        #6b3f23
-    );
-
-    background-size: 300% 100%;
-    animation: coffeeMove 5s linear infinite;
-}
-
-@keyframes coffeeMove {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
-}
 
 .hero-description {
     font-size: 15px;     /* smaller */
@@ -680,14 +654,14 @@ section {
 }
 
 .principal-header img {
-    width: 64px;          /* Discord-like size */
-    height: 64px;
+    width: 60px;          /* Discord-like size */
+    height: 60px;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .principal-meta h2 {
-    font-size: 22px;
+    font-size: 20px;
     margin-bottom: 4px;
 }
 
@@ -1148,7 +1122,7 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     }
 
     .hero h1 {
-        font-size: 26px;
+        font-size: 20px;
     }
    
 }
