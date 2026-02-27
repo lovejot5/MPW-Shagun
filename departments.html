@@ -8,9 +8,11 @@
 </head>
 <body>
 
-<!-- ================= HEADER ================= -->
+<div class="cursor-glow"></div>
+<div class="preloader"></div>
 
-<header id="header">
+<!-- ================= HEADER ================= -->
+<header>
     <div class="logo">
         <img src="Images/logo.jpeg" alt="College Logo">
         <div>
@@ -21,136 +23,202 @@
 
     <ul id="menu">
         <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="departments.html" class="nav-link active">Departments</a></li>
         <li><a href="student.html" class="nav-link">Student Corner</a></li>
+        <li><a href="notices.html" class="nav-link">Notices</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
     </ul>
 
-    <div class="menu-btn" onclick="toggleMenu()">
+    <div class="menu-btn">
         <span></span>
         <span></span>
         <span></span>
     </div>
 </header>
 
-<!-- ================= PAGE HERO ================= -->
+<div class="menu-overlay"></div>
 
-<section class="hero small-hero">
-    <div class="hero-content">
+<!-- ================= PAGE CONTENT ================= -->
+<div class="page-content">
+
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero reveal">
         <h1>Our Academic Departments</h1>
-        <p>Delivering industry-focused diploma programs with modern laboratories and experienced faculty.</p>
-    </div>
-</section>
-
-<!-- ================= DEPARTMENT LIST ================= -->
-
-<section>
-<div class="container-large">
-<h2 class="section-title">Engineering Branches</h2>
-
-<div class="grid-3">
-
-    <div class="card">
-        <h3>Computer Engineering</h3>
-        <p>
-            Focused on programming, networking, databases, and modern
-            software development technologies.
+        <p class="hero-description">
+            Government Polytechnic College, Bathinda offers industry-oriented diploma programs designed to equip students with practical knowledge, technical competence, and professional ethics.
         </p>
-    </div>
+    </section>
 
-    <div class="card">
-        <h3>Mechanical Engineering</h3>
-        <p>
-            Covers manufacturing, thermal engineering,
-            machine design, and workshop practice.
-        </p>
-    </div>
 
-    <div class="card">
-        <h3>Electrical Engineering</h3>
-        <p>
-            Study of power systems, machines, electrical
-            installations, and industrial automation.
-        </p>
-    </div>
+    <!-- ================= DEPARTMENT LIST ================= -->
+    <section class="reveal">
+        <div class="container-large">
+            <h2>Engineering Branches</h2>
+            <br>
 
-    <div class="card">
-        <h3>Civil Engineering</h3>
-        <p>
-            Training in structural design, surveying,
-            construction technology, and infrastructure development.
-        </p>
-    </div>
+            <div class="grid-3">
 
-    <div class="card">
-        <h3>Electronics & Communication</h3>
-        <p>
-            Focus on communication systems,
-            embedded systems, and circuit design.
-        </p>
-    </div>
+                <div class="card">
+                    <h3>Computer Engineering</h3>
+                    <p>Programming, networking, databases, cybersecurity, and modern software development technologies.</p>
+                </div>
 
-    <div class="card">
-        <h3>Applied Sciences</h3>
-        <p>
-            Mathematics, Physics, and foundational sciences
-            supporting all engineering disciplines.
-        </p>
-    </div>
+                <div class="card">
+                    <h3>Mechanical Engineering</h3>
+                    <p>Manufacturing, thermal engineering, machine design, production systems, and workshop practice.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Electrical Engineering</h3>
+                    <p>Power systems, electrical machines, industrial automation, and electrical installations.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Civil Engineering</h3>
+                    <p>Structural design, surveying, construction technology, transportation engineering, and infrastructure development.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Electronics & Communication</h3>
+                    <p>Communication systems, embedded systems, signal processing, and circuit design.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Applied Sciences</h3>
+                    <p>Mathematics, Physics, and foundational sciences that support all engineering disciplines.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FACILITIES ================= -->
+    <section class="reveal">
+        <div class="container-large">
+            <h2>Department Facilities</h2>
+            <br>
+
+            <div class="grid-3">
+                <div class="card"><p>✔ Modern Laboratories</p></div>
+                <div class="card"><p>✔ Experienced Faculty</p></div>
+                <div class="card"><p>✔ Industrial Training Programs</p></div>
+                <div class="card"><p>✔ Smart Classrooms</p></div>
+                <div class="card"><p>✔ Library & Digital Resources</p></div>
+                <div class="card"><p>✔ Placement Assistance Cell</p></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FAQ SECTION ================= -->
+    <section class="reveal">
+        <div class="container-large">
+            <h2>Frequently Asked Questions</h2>
+            <br>
+
+            <div class="faq-item">
+                <button class="faq-question">What diploma programs are offered?</button>
+                <div class="faq-answer">
+                    <p>
+                        The college offers diploma programs in Computer, Mechanical, Electrical, Civil, Electronics & Communication Engineering, and Applied Sciences.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Are there industrial training opportunities?</button>
+                <div class="faq-answer">
+                    <p>
+                        Yes, students undergo industrial training programs and internships to gain real-world technical experience.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Does the college provide placement support?</button>
+                <div class="faq-answer">
+                    <p>
+                        The institution has a placement cell that coordinates campus drives, skill workshops, and career guidance sessions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What facilities are available on campus?</button>
+                <div class="faq-answer">
+                    <p>
+                        The campus includes modern laboratories, workshops, library resources, sports facilities, and smart classrooms.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
 </div>
-</div>
-</section>
 
-<!-- ================= FACILITIES ================= -->
-
-<section>
-<div class="container-large">
-<h2 class="section-title">Department Facilities</h2>
-
-<ul class="feature-list">
-    <li>✔ Modern Laboratories</li>
-    <li>✔ Experienced Faculty</li>
-    <li>✔ Industrial Training Programs</li>
-    <li>✔ Smart Classrooms</li>
-    <li>✔ Library & Digital Resources</li>
-</ul>
-
-</div>
-</section>
 
 <!-- ================= FOOTER ================= -->
-
 <footer class="site-footer">
-<div class="footer-grid">
 
-    <div>
-        <img src="Images/logo.jpeg" style="width:70px;border-radius:50%;">
+    <div class="footer-top">
+        <img src="Images/logo.jpeg" alt="College Logo">
         <h3>Government Polytechnic College</h3>
         <p>Bathinda, Punjab</p>
+        <div class="footer-divider"></div>
     </div>
 
-    <div>
-        <h4>Navigation</h4>
-        <a href="index.html">Home</a>
-        <a href="departments.html">Departments</a>
-        <a href="student.html">Student Corner</a>
-        <a href="contact.html">Contact</a>
+    <div class="footer-grid">
+
+        <div>
+            <h4>Navigation</h4>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="departments.html">Departments</a>
+            <a href="student.html">Student Corner</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div>
+            <h4>Important Links</h4>
+            <a href="#">Admissions</a>
+            <a href="#">Results</a>
+            <a href="#">Placements</a>
+            <a href="notices.html">Notices</a>
+        </div>
+
+        <div>
+            <h4>Contact</h4>
+            <p>Bibi Wala Road, Bathinda</p>
+            <p><a href="mailto:gpcbathinda@punjab.gov.in">gpcbathinda@punjab.gov.in</a></p>
+            <p><a href="tel:01642246394">0164-2246394</a></p>
+        </div>
+
+        <div class="footer-map">
+            <h4>Locate Us</h4>
+            <iframe
+                src="https://www.google.com/maps?q=Government+Polytechnic+College+Bathinda&output=embed"
+                loading="lazy"
+                allowfullscreen>
+            </iframe>
+        </div>
+
     </div>
 
-    <div>
-        <h4>Contact</h4>
-        <p>Bibi Wala Road, Bathinda</p>
-        <p>0164-2246394</p>
-        <p>gpcbathinda@punjab.gov.in</p>
+    <div class="footer-bottom">
+        © 2025 Government Polytechnic College, Bathinda. All Rights Reserved.
     </div>
 
-</div>
-
-<div class="footer-bottom">
-© 2025 Government Polytechnic College, Bathinda
-</div>
 </footer>
+
+<div class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    ↑
+</div>
 
 <script src="script.js"></script>
 </body>
