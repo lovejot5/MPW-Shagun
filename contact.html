@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#efe3d3">
 <title>Contact | Government Polytechnic College, Bathinda</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ================= HEADER ================= -->
+<div class="cursor-glow"></div>
+<div class="preloader"></div>
 
-<header id="header">
+<!-- ================= HEADER ================= -->
+<header>
     <div class="logo">
         <img src="Images/logo.jpeg" alt="College Logo">
         <div>
@@ -21,138 +24,186 @@
 
     <ul id="menu">
         <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="departments.html" class="nav-link">Departments</a></li>
         <li><a href="student.html" class="nav-link">Student Corner</a></li>
+        <li><a href="notices.html" class="nav-link">Notices</a></li>
         <li><a href="contact.html" class="nav-link active">Contact</a></li>
     </ul>
 
-    <div class="menu-btn" onclick="toggleMenu()">
+    <div class="menu-btn">
         <span></span>
         <span></span>
         <span></span>
     </div>
 </header>
 
-<!-- ================= HERO ================= -->
+<div class="menu-overlay"></div>
 
-<section class="hero small-hero">
-    <div class="hero-content">
+<!-- ================= PAGE CONTENT ================= -->
+<div class="page-content">
+
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero reveal">
         <h1>Contact Us</h1>
-        <p>We are here to assist you.</p>
-    </div>
-</section>
-
-<!-- ================= CONTACT INFO ================= -->
-
-<section>
-<div class="container-large">
-<h2 class="section-title">Contact Information</h2>
-
-<div class="grid-3">
-
-    <div class="card">
-        <h3>Address</h3>
-        <p>
-            Government Polytechnic College<br>
-            Bibi Wala Road<br>
-            Bathinda, Punjab
+        <p class="hero-description">
+            We welcome your queries, feedback, and communication. Reach out to us through the details below.
         </p>
-    </div>
+    </section>
 
-    <div class="card">
-        <h3>Phone</h3>
-        <p>0164-2246394</p>
-    </div>
+    <!-- ================= CONTACT INFO ================= -->
+    <section class="reveal">
+        <div class="container-large">
 
-    <div class="card">
-        <h3>Email</h3>
-        <p>gpcbathinda@punjab.gov.in</p>
-    </div>
+            <h2>Contact Information</h2>
+            <br>
+
+            <div class="grid-3">
+
+                <div class="card">
+                    <h3>Address</h3>
+                    <p>
+                        Government Polytechnic College<br>
+                        Bibi Wala Road<br>
+                        Bathinda, Punjab
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Phone</h3>
+                    <p>
+                        <a href="tel:01642246394">0164-2246394</a>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Email</h3>
+                    <p>
+                        <a href="mailto:gpcbathinda@punjab.gov.in">
+                            gpcbathinda@punjab.gov.in
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= CONTACT FORM ================= -->
+    <section class="reveal">
+        <div class="container-large">
+
+            <h2>Send Us a Message</h2>
+            <br>
+
+            <form class="contact-form">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="5" placeholder="Write your message" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+    </section>
+
+    <!-- ================= MAP ================= -->
+    <section class="reveal">
+        <div class="container-large">
+
+            <h2>Locate Us</h2>
+            <br>
+
+            <div class="map-container">
+                <iframe
+                    src="https://maps.google.com/maps?q=Government%20Polytechnic%20College%20Bathinda&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+    </section>
 
 </div>
-</div>
-</section>
-
-<!-- ================= CONTACT FORM ================= -->
-
-<section>
-<div class="container-large">
-<h2 class="section-title">Send Us a Message</h2>
-
-<form class="contact-form">
-
-    <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" placeholder="Enter your name">
-    </div>
-
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="Enter your email">
-    </div>
-
-    <div class="form-group">
-        <label>Message</label>
-        <textarea rows="5" placeholder="Write your message"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Send Message</button>
-
-</form>
-
-</div>
-</section>
-
-<!-- ================= MAP ================= -->
-
-<section>
-<div class="container-large">
-<h2 class="section-title">Locate Us</h2>
-
-<div class="map-container">
-    <iframe
-        src="https://maps.google.com/maps?q=Government%20Polytechnic%20College%20Bathinda&t=&z=13&ie=UTF8&iwloc=&output=embed"
-        allowfullscreen=""
-        loading="lazy">
-    </iframe>
-</div>
-
-</div>
-</section>
 
 <!-- ================= FOOTER ================= -->
-
 <footer class="site-footer">
-<div class="footer-grid">
 
-    <div>
-        <img src="Images/logo.jpeg" style="width:70px;border-radius:50%;">
+    <div class="footer-top">
+        <img src="Images/logo.jpeg" alt="College Logo">
         <h3>Government Polytechnic College</h3>
         <p>Bathinda, Punjab</p>
+        <div class="footer-divider"></div>
     </div>
 
-    <div>
-        <h4>Navigation</h4>
-        <a href="index.html">Home</a>
-        <a href="departments.html">Departments</a>
-        <a href="student.html">Student Corner</a>
-        <a href="contact.html">Contact</a>
+    <div class="footer-grid">
+
+        <div>
+            <h4>Navigation</h4>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="departments.html">Departments</a>
+            <a href="student.html">Student Corner</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div>
+            <h4>Important Links</h4>
+            <a href="#">Admissions</a>
+            <a href="#">Results</a>
+            <a href="#">Placements</a>
+            <a href="notices.html">Notices</a>
+        </div>
+
+        <div>
+            <h4>Contact</h4>
+            <p>Bibi Wala Road, Bathinda</p>
+            <p><a href="mailto:gpcbathinda@punjab.gov.in">gpcbathinda@punjab.gov.in</a></p>
+            <p><a href="tel:01642246394">0164-2246394</a></p>
+        </div>
+
+        <div class="footer-map">
+            <h4>Locate Us</h4>
+            <iframe
+                src="https://www.google.com/maps?q=Government%20Polytechnic%20College%20Bathinda&output=embed"
+                loading="lazy"
+                allowfullscreen>
+            </iframe>
+        </div>
+
     </div>
 
-    <div>
-        <h4>Contact</h4>
-        <p>Bibi Wala Road, Bathinda</p>
-        <p>0164-2246394</p>
-        <p>gpcbathinda@punjab.gov.in</p>
+    <div class="footer-bottom">
+        © 2025 Government Polytechnic College, Bathinda. All Rights Reserved.
     </div>
 
-</div>
-
-<div class="footer-bottom">
-© 2025 Government Polytechnic College, Bathinda
-</div>
 </footer>
 
+<div class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    ↑
+</div>
+
 <script src="script.js"></script>
+
 </body>
 </html>
