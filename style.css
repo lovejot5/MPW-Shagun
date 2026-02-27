@@ -613,7 +613,17 @@ section {
     font-size: 12px;
     opacity: 0.6;
 }
+.news-link {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    padding: 12px 0;
+}
 
+.news-link:hover .news-title {
+    color: #6b3f23; /* coffee hover */
+}
 /* Clean institutional NEW badge */
 .latest-news-list li[data-new="true"] .news-title::after {
     content: " NEW";
