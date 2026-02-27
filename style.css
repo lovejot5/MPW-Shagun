@@ -1,29 +1,29 @@
 :root {
 
-    /* ===== BACKGROUNDS ===== */
-    --bg-main: #f4eee6;
-    --bg-header: rgba(255, 249, 242, 0.75);
-    --bg-card: rgba(255, 255, 255, 0.82);
+    /* ===== BACKGROUNDS (More Depth & Contrast) ===== */
+    --bg-main: #f8f3ec;
+    --bg-header: rgba(255, 252, 248, 0.92);
+    --bg-card: rgba(255, 255, 255, 0.85);
 
-    /* ===== PRIMARY ACCENT (Refined Academic Brown) ===== */
-    --accent: #7a4e2d;
-    --accent-soft: #e7d6c6;
-    --accent-dark: #5c3821;
+    /* ===== PREMIUM ACADEMIC BROWN (Refined & Richer) ===== */
+    --accent: #6b3f23;          /* deeper & more premium */
+    --accent-soft: #efe0d2;     /* warm soft cream */
+    --accent-dark: #4b2c18;     /* strong institutional */
 
-    /* ===== TEXT SYSTEM ===== */
-    --text-dark: #2a211b;
-    --text-light: #5f5146;
-    --text-muted: #9a8c7f;
+    /* ===== TEXT SYSTEM (Stronger Contrast) ===== */
+    --text-dark: #241c16;
+    --text-light: #5a4a3f;
+    --text-muted: #9c8e82;
 
-    /* ===== SHADOW SYSTEM (Warmer & Softer) ===== */
-    --shadow-soft: 0 8px 20px rgba(122, 78, 45, 0.08);
-    --shadow-medium: 0 20px 50px rgba(122, 78, 45, 0.12);
-    --shadow-strong: 0 35px 80px rgba(122, 78, 45, 0.18);
+    /* ===== SHADOW SYSTEM (More Elegant Depth) ===== */
+    --shadow-soft: 0 10px 25px rgba(107,63,35,0.08);
+    --shadow-medium: 0 25px 60px rgba(107,63,35,0.12);
+    --shadow-strong: 0 40px 90px rgba(107,63,35,0.18);
 
     /* ===== RADIUS ===== */
     --radius-sm: 12px;
     --radius-md: 20px;
-    --radius-lg: 30px;
+    --radius-lg: 32px;
 
     /* ===== TRANSITION ===== */
     --transition: 0.3s ease;
@@ -45,8 +45,8 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(
         180deg,
-        #f6efe7 0%,
-        #f2e8dc 100%
+        #fbf6f0 0%,
+        #f1e7db 100%
     );
     color: var(--text-dark);
     line-height: 1.7;
