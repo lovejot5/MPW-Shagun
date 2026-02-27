@@ -594,35 +594,50 @@ section {
 }
 
 
-/* ========================= NEWS ========================== */
+/* ================= NEWS STYLING ================= */
 
 .latest-news-container {
-    max-height: 300px;
+    max-height: 240px;
     overflow-y: auto;
-    padding-right: 10px;
+    scroll-behavior: smooth;
+    position: relative;
 }
 
-.latest-news-container::-webkit-scrollbar {
-    width: 6px;
-}
-
-.latest-news-container::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 10px;
+.latest-news-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .latest-news-list li {
-padding: 12px 0;
-border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
 }
 
-.news-badge {
-background: var(--accent);
-color: white;
-padding: 3px 8px;
-border-radius: 10px;
-font-size: 11px;
-margin-left: 6px;
+.news-title {
+    font-weight: 500;
+}
+
+.news-date {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+/* Glowing NEW badge */
+.latest-news-list li[data-new="true"]::before {
+    content: "●";
+    color: #ff3b3b;
+    margin-right: 8px;
+    animation: newsGlow 1.2s infinite alternate;
+}
+
+@keyframes newsGlow {
+    from { text-shadow: 0 0 4px #ff3b3b; }
+    to { text-shadow: 0 0 14px #ff0000; }
 }
 
 /* ========================= NOTICES ========================== */
