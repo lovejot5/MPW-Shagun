@@ -957,7 +957,7 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     position: fixed;
     width: 260px;
     height: 260px;
-    background: radial-gradient(circle, rgba(122,78,45,0.12), transparent 70%);
+    background: radial-gradient(circle, rgba(122,78,45,0.08), transparent 70%);
     pointer-events: none;
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -1082,7 +1082,7 @@ body::before {
     right: -200px;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(95,140,255,0.15), transparent 70%);
+    background: radial-gradient(circle, rgba(122,78,45,0.08), transparent 70%);
     filter: blur(120px);
     z-index: -1;
 }
