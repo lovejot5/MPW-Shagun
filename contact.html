@@ -100,11 +100,7 @@
             <h2>Send Us a Message</h2>
             <br>
 
-            <form 
-  action="https://formspree.io/f/mqedjyar" 
-  method="POST" 
-  class="contact-form"
->
+            <form id="contactForm" class="contact-form">
 
     <div class="form-group">
         <label>Full Name</label>
@@ -121,11 +117,9 @@
         <textarea name="message" rows="5" required></textarea>
     </div>
 
-    <!-- Optional subject -->
-    <input type="hidden" name="_subject" value="New Contact Form Submission - GPC Bathinda">
-
     <button type="submit" class="btn btn-primary">
-        Send Message
+        <span class="btn-text">Send Message</span>
+        <span class="spinner" style="display:none;"></span>
     </button>
 
 </form>
