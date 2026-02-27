@@ -202,15 +202,31 @@ function initImageModal() {
 }
 
 
-/* ================= FAQ ================= */
+/* ================= PREMIUM FAQ ================= */
+
 function initFAQ() {
-    document.querySelectorAll(".faq-question").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const item = btn.parentElement;
-            document.querySelectorAll(".faq-item")
-                .forEach(i => i.classList.remove("active"));
+
+    const items = document.querySelectorAll(".faq-item");
+
+    items.forEach((item, index) => {
+
+        const button = item.querySelector(".faq-question");
+
+        button.addEventListener("click", () => {
+
+            // Close all
+            items.forEach(i => {
+                if (i !== item) i.classList.remove("active");
+            });
+
+            // Toggle current
             item.classList.toggle("active");
         });
+
+        // Open first question by default
+        if (index === 0) {
+            item.classList.add("active");
+        }
     });
 }
 
