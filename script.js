@@ -270,6 +270,8 @@ window.addEventListener("load", () => {
 
 /* ================= WORKING AUTO NEWS ================= */
 
+/* ================= TRUE VERTICAL NEWS TICKER ================= */
+
 function initNewsSystem() {
 
     const container = document.querySelector(".latest-news-container");
@@ -285,10 +287,10 @@ function initNewsSystem() {
 
             renderNews(data, list);
 
-            // Duplicate content for infinite loop
+            // Duplicate for seamless loop
             list.innerHTML += list.innerHTML;
 
-            autoScroll(container);
+            startVerticalTicker(container, list);
         })
         .catch(err => console.error("News loading failed:", err));
 }
@@ -322,43 +324,35 @@ function renderNews(data, list) {
 }
 
 
-function autoScroll(container) {
+function startVerticalTicker(container, list) {
 
+    let position = 0;
     let speed = 0.5;
     let pause = false;
 
-    function step() {
+    function animate() {
 
-        if (!pause && container.scrollHeight > container.clientHeight) {
+        if (!pause) {
+            position -= speed;
 
-            container.scrollTop += speed;
-
-            if (container.scrollTop >= container.scrollHeight / 2) {
-                container.scrollTop = 0;
+            if (Math.abs(position) >= list.scrollHeight / 2) {
+                position = 0;
             }
+
+            list.style.transform = `translateY(${position}px)`;
         }
 
-        requestAnimationFrame(step);
+        requestAnimationFrame(animate);
     }
 
-    // Delay start slightly to ensure height calculation
-    setTimeout(() => {
-        requestAnimationFrame(step);
-    }, 300);
+    requestAnimationFrame(animate);
 
     container.addEventListener("mouseenter", () => pause = true);
     container.addEventListener("mouseleave", () => pause = false);
 
     container.addEventListener("touchstart", () => pause = true);
     container.addEventListener("touchend", () => {
-        setTimeout(() => pause = false, 1200);
-    });
-
-    let timeout;
-    container.addEventListener("scroll", () => {
-        pause = true;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => pause = false, 1500);
+        setTimeout(() => pause = false, 1500);
     });
 }
 /* ================= SLIDER ================= */
