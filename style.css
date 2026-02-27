@@ -559,23 +559,17 @@ section {
 }
 
 
-/* ================= NEWS STYLING ================= */
+/* ================= CLEAN NEWS ================= */
 
 .latest-news-container {
     max-height: 240px;
     overflow-y: auto;
-    scroll-behavior: smooth;
     position: relative;
-}
-
-.latest-news-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    scroll-behavior: smooth;
 }
 
 .latest-news-list li {
-    padding: 12px 0;
+    padding: 14px 0;
     border-bottom: 1px solid rgba(0,0,0,0.08);
     display: flex;
     justify-content: space-between;
@@ -592,40 +586,17 @@ section {
     opacity: 0.6;
 }
 
-/* Glowing NEW badge */
-.latest-news-list li[data-new="true"]::before {
-    content: "●";
-    color: #ff3b3b;
-    margin-right: 8px;
-    animation: newsGlow 1.2s infinite alternate;
-}
+/* Brown NEW badge */
+.latest-news-list li[data-new="true"] .news-title::after {
+    content: " NEW";
+    margin-left: 10px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 20px;
 
-@keyframes newsGlow {
-    from { text-shadow: 0 0 4px #ff3b3b; }
-    to { text-shadow: 0 0 14px #ff0000; }
-}
-.latest-news-container {
-    position: relative;
-}
-
-.latest-news-container::before,
-.latest-news-container::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 40px;
-    pointer-events: none;
-}
-
-.latest-news-container::before {
-    top: 0;
-    background: linear-gradient(to bottom, #f4efe9, transparent);
-}
-
-.latest-news-container::after {
-    bottom: 0;
-    background: linear-gradient(to top, #f4efe9, transparent);
+    background: rgba(107,63,35,0.15);
+    color: var(--accent);
 }
 /* ================= PRINCIPAL MESSAGE CARD ================= */
 
