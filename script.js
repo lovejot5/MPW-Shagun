@@ -329,11 +329,11 @@ function startAutoScroll(container) {
 
     let speed = 0.5;
     let pause = false;
-    let userInteracting = false;
+    let userScrolling = false;
 
     function animate() {
 
-        if (!pause && !userInteracting && container.scrollHeight > container.clientHeight) {
+        if (!pause && !userScrolling && container.scrollHeight > container.clientHeight) {
 
             container.scrollTop += speed;
 
@@ -347,27 +347,27 @@ function startAutoScroll(container) {
 
     requestAnimationFrame(animate);
 
-
-    /* Detect REAL user interaction */
-    container.addEventListener("wheel", () => {
-        userInteracting = true;
-        resetUserPause();
-    });
-
-    container.addEventListener("touchstart", () => {
-        userInteracting = true;
-    });
-
-    container.addEventListener("touchend", () => {
-        resetUserPause();
-    });
-
+    /* Pause on hover */
     container.addEventListener("mouseenter", () => pause = true);
     container.addEventListener("mouseleave", () => pause = false);
 
-    function resetUserPause() {
+    /* Detect REAL user scroll only */
+    container.addEventListener("wheel", () => {
+        userScrolling = true;
+        resetUserScrolling();
+    });
+
+    container.addEventListener("touchstart", () => {
+        userScrolling = true;
+    });
+
+    container.addEventListener("touchend", () => {
+        resetUserScrolling();
+    });
+
+    function resetUserScrolling() {
         setTimeout(() => {
-            userInteracting = false;
+            userScrolling = false;
         }, 1500);
     }
 }
