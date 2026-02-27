@@ -1359,16 +1359,8 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     font-weight: 500;
 }
 .page-content {
-    position: relative;   /* REQUIRED for stacking context */
-    z-index: 1;           /* Recommended for safety */
-
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 0.6s ease;
-}
-.page-content.loaded {
-    opacity: 1;
-    transform: translateY(0);
+    position: relative;
+    z-index: 1;
 }
 
 /* ================= BACKGROUND GLOW ================= */
