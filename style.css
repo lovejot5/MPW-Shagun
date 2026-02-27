@@ -737,41 +737,65 @@ section {
 }
 
 
-/* ================= CLEAN HOMEPAGE FAQ ================= */
+/* ================= PREMIUM FAQ ================= */
 
 .faq-item {
     margin-bottom: 14px;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    background: rgba(255,255,255,0.75);
-    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(18px);
     border: 1px solid rgba(0,0,0,0.05);
     transition: 0.3s ease;
 }
 
+.faq-item:hover {
+    background: rgba(255,255,255,0.85);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* Question Button */
 .faq-question {
     width: 100%;
-    padding: 16px 20px;
+    padding: 18px 22px;
     font-size: 15px;
     font-weight: 500;
     text-align: left;
     background: transparent;
     border: none;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: var(--text-dark);
 }
 
+/* Animated Icon */
+.faq-icon {
+    font-size: 20px;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+/* Rotate icon when active */
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+/* Smooth Slide Animation */
 .faq-answer {
-    padding: 0 20px 18px 20px;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 22px;
     font-size: 14px;
     color: var(--text-light);
-    display: none;
+    transition: max-height 0.4s ease, padding 0.3s ease;
 }
 
 .faq-item.active .faq-answer {
-    display: block;
+    max-height: 300px;
+    padding: 0 22px 18px 22px;
 }
-
 /* ========================= FORMS ========================== */
 
 .contact-form input,
