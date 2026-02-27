@@ -1080,6 +1080,15 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
         flex-direction: column;
         text-align: center;
     }
+    
+    .principal-author {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .principal-content p {
+        text-align: left;
+    }
 
     .container-large {
         padding: 40px;
