@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Components */
     initFAQ();
+   initNotices();
     initContactAjax();
     initBackToTop();
     initSmoothScroll();
@@ -446,7 +447,73 @@ function startAutoScroll(container) {
     }
 }
 
+/* ================= DISCORD STYLE NOTICE SYSTEM ================= */
 
+function initNotices() {
+
+    const container = document.getElementById("noticeContainer");
+    if (!container) return;
+
+    fetch("data/notices.json")
+        .then(res => res.json())
+        .then(data => {
+
+            data.sort((a,b)=> new Date(b.date) - new Date(a.date));
+
+            data.forEach(notice => {
+
+                const card = document.createElement("div");
+                card.className = "notice-embed reveal";
+
+                const date = new Date(notice.date).toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                });
+
+                card.innerHTML = `
+                    ${notice.isNew ? `<div class="notice-new">NEW</div>` : ""}
+
+                    <div class="notice-top">
+                        <img src="${notice.author.icon}" alt="">
+                        <div class="notice-author">${notice.author.name}</div>
+                        <div class="notice-category">${notice.category}</div>
+                    </div>
+
+                    <div class="notice-title">${notice.title}</div>
+                    <div class="notice-date">${date}</div>
+
+                    <div class="notice-description">
+                        ${notice.description}
+                    </div>
+
+                    ${
+                        notice.images && notice.images.length
+                        ? `<div class="notice-image">
+                            <img src="${notice.images[0]}" alt="">
+                           </div>`
+                        : ""
+                    }
+
+                    ${
+                        notice.buttons && notice.buttons.length
+                        ? `<div class="notice-buttons">
+                            ${notice.buttons.map(btn =>
+                                `<a href="${btn.link}" class="notice-btn" target="_blank">
+                                    ${btn.text}
+                                </a>`
+                            ).join("")}
+                           </div>`
+                        : ""
+                    }
+                `;
+
+                container.appendChild(card);
+            });
+
+        })
+        .catch(err => console.error("Notice loading failed:", err));
+}
 
 /* ================= SLIDER ================= */
 function initSlider() {
