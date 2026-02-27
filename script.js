@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initBackToTop();
     initSmoothScroll();
     initImageModal();
-    initNewsSystem();
+    initNewsAutoScroll();
 });
 
 /* ================= HEADER SCROLL + BLUR ================= */
@@ -460,50 +460,94 @@ document.querySelector(".slider").addEventListener("touchend", e => {
     if (endX - startX > 50) prevSlide();
 });
 
-/* ================= NEWS AUTO SCROLL ================= */
+/* ================= INFINITE NEWS AUTO SCROLL (SMOOTH + TOUCH SAFE) ================= */
 
-const newsBox = document.querySelector(".auto-scroll");
+function initNewsAutoScroll() {
 
-let scrollAmount = 0;
-
-setInterval(() => {
+    const newsBox = document.querySelector(".latest-news-container");
     if (!newsBox) return;
-    scrollAmount += 1;
-    newsBox.scrollTop = scrollAmount;
 
-    if (scrollAmount >= newsBox.scrollHeight - newsBox.clientHeight) {
-        scrollAmount = 0;
+    let speed = 0.5;
+    let paused = false;
+
+    function animate() {
+
+        if (!paused) {
+            newsBox.scrollTop += speed;
+
+            // seamless infinite loop (duplicate content required)
+            if (newsBox.scrollTop >= newsBox.scrollHeight / 2) {
+                newsBox.scrollTop = 0;
+            }
+        }
+
+        requestAnimationFrame(animate);
     }
-}, 40);
 
-/* ================= COUNTER ANIMATION ================= */
+    requestAnimationFrame(animate);
 
-const counters = document.querySelectorAll(".stat-number");
+    /* ---- Pause on interaction ---- */
 
-const counterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+    newsBox.addEventListener("mouseenter", () => paused = true);
+    newsBox.addEventListener("mouseleave", () => paused = false);
+
+    newsBox.addEventListener("touchstart", () => paused = true);
+    newsBox.addEventListener("touchend", () => {
+        setTimeout(() => paused = false, 1500);
+    });
+
+    let scrollTimeout;
+
+    newsBox.addEventListener("scroll", () => {
+        paused = true;
+        clearTimeout(scrollTimeout);
+
+        scrollTimeout = setTimeout(() => {
+            paused = false;
+        }, 1500);
+    });
+}
+
+
+/* ================= IMPROVED COUNTER ANIMATION ================= */
+
+function initStatCounters() {
+
+    const counters = document.querySelectorAll(".stat-number");
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
             const counter = entry.target;
-            const target = +counter.getAttribute("data-target");
-            let count = 0;
+            const target = parseInt(counter.dataset.target);
+            let current = 0;
 
-            const update = () => {
-                const increment = target / 100;
-                if (count < target) {
-                    count += increment;
-                    counter.innerText = Math.ceil(count);
+            const duration = 1500; // ms
+            const startTime = performance.now();
+
+            function update(time) {
+
+                const progress = Math.min((time - startTime) / duration, 1);
+                current = Math.floor(progress * target);
+
+                counter.textContent = current;
+
+                if (progress < 1) {
                     requestAnimationFrame(update);
                 } else {
-                    counter.innerText = target + "+";
+                    counter.textContent = target + "+";
                 }
-            };
+            }
 
-            update();
-            counterObserver.unobserve(counter);
-        }
-    });
-}, { threshold: 0.6 });
+            requestAnimationFrame(update);
+            observer.unobserve(counter);
+        });
 
-counters.forEach(counter => {
-    counterObserver.observe(counter);
-});
+    }, { threshold: 0.6 });
+
+    counters.forEach(counter => observer.observe(counter));
+}
