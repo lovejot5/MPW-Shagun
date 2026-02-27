@@ -417,3 +417,93 @@ function startAutoScroll(container) {
         setTimeout(() => isPaused = false, 1200);
     });
 }
+
+/* ================= SLIDER ================= */
+
+const slides = document.querySelectorAll(".slide");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+
+let current = 0;
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+}
+
+function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+}
+
+function prevSlide() {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+}
+
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
+
+/* Autoplay 3 sec */
+setInterval(nextSlide, 3000);
+
+/* Touch Swipe Support */
+let startX = 0;
+
+document.querySelector(".slider").addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+document.querySelector(".slider").addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) nextSlide();
+    if (endX - startX > 50) prevSlide();
+});
+
+/* ================= NEWS AUTO SCROLL ================= */
+
+const newsBox = document.querySelector(".auto-scroll");
+
+let scrollAmount = 0;
+
+setInterval(() => {
+    if (!newsBox) return;
+    scrollAmount += 1;
+    newsBox.scrollTop = scrollAmount;
+
+    if (scrollAmount >= newsBox.scrollHeight - newsBox.clientHeight) {
+        scrollAmount = 0;
+    }
+}, 40);
+
+/* ================= COUNTER ANIMATION ================= */
+
+const counters = document.querySelectorAll(".stat-number");
+
+const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = +counter.getAttribute("data-target");
+            let count = 0;
+
+            const update = () => {
+                const increment = target / 100;
+                if (count < target) {
+                    count += increment;
+                    counter.innerText = Math.ceil(count);
+                    requestAnimationFrame(update);
+                } else {
+                    counter.innerText = target + "+";
+                }
+            };
+
+            update();
+            counterObserver.unobserve(counter);
+        }
+    });
+}, { threshold: 0.6 });
+
+counters.forEach(counter => {
+    counterObserver.observe(counter);
+});
