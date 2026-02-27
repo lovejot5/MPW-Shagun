@@ -327,16 +327,16 @@ function renderNews(data, list) {
 
 function startAutoScroll(container) {
 
-    let speed = 0.5;     // adjust speed here
+    let speed = 0.5;
     let pause = false;
+    let userInteracting = false;
 
     function animate() {
 
-        if (!pause && container.scrollHeight > container.clientHeight) {
+        if (!pause && !userInteracting && container.scrollHeight > container.clientHeight) {
 
             container.scrollTop += speed;
 
-            // reset at halfway point (because duplicated)
             if (container.scrollTop >= container.scrollHeight / 2) {
                 container.scrollTop = 0;
             }
@@ -345,29 +345,31 @@ function startAutoScroll(container) {
         requestAnimationFrame(animate);
     }
 
-    // Small delay ensures height is calculated properly
-    setTimeout(() => {
-        requestAnimationFrame(animate);
-    }, 400);
+    requestAnimationFrame(animate);
 
 
-    /* Pause on hover */
+    /* Detect REAL user interaction */
+    container.addEventListener("wheel", () => {
+        userInteracting = true;
+        resetUserPause();
+    });
+
+    container.addEventListener("touchstart", () => {
+        userInteracting = true;
+    });
+
+    container.addEventListener("touchend", () => {
+        resetUserPause();
+    });
+
     container.addEventListener("mouseenter", () => pause = true);
     container.addEventListener("mouseleave", () => pause = false);
 
-    /* Pause on manual scroll */
-    let timeout;
-    container.addEventListener("scroll", () => {
-        pause = true;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => pause = false, 1500);
-    });
-
-    /* Mobile support */
-    container.addEventListener("touchstart", () => pause = true);
-    container.addEventListener("touchend", () => {
-        setTimeout(() => pause = false, 1500);
-    });
+    function resetUserPause() {
+        setTimeout(() => {
+            userInteracting = false;
+        }, 1500);
+    }
 }
 
 /* ================= SLIDER ================= */
