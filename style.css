@@ -554,23 +554,24 @@ section {
 
 /* ================= CLEAN NEWS ================= */
 /* ================= GLASS VERTICAL NEWS TICKER ================= */
+/* ================= GLASS NEWS WITH SCROLLBAR ================= */
 
 .latest-news-container {
     position: relative;
-    height: 280px;                 /* taller, not compact */
-    overflow: hidden;              /* no manual scrollbar */
+    height: 280px;
+    overflow-y: auto;                /* enable scrollbar */
+    scroll-behavior: smooth;
     border-radius: 22px;
 
-    /* Glass effect */
     background: rgba(255,255,255,0.20);
-    backdrop-filter: blur(30px) saturate(160%);
-    -webkit-backdrop-filter: blur(30px) saturate(160%);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
 
     border: 1px solid rgba(255,255,255,0.35);
     box-shadow: 0 12px 40px rgba(0,0,0,0.06);
 }
 
-/* Subtle noise texture */
+/* Noise */
 .latest-news-container::before {
     content: "";
     position: absolute;
@@ -587,21 +588,13 @@ section {
 </svg>");
 }
 
-/* Moving list */
-.latest-news-list {
-    position: absolute;
-    width: 100%;
-    will-change: transform;
-}
-
-/* Individual news item */
+/* Items */
 .latest-news-list li {
     padding: 18px 24px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
-    font-size: 13px;              /* smaller text */
+    font-size: 13px;
 }
 
-/* Link layout */
 .news-link {
     display: flex;
     justify-content: space-between;
@@ -610,20 +603,17 @@ section {
     color: inherit;
 }
 
-/* Title */
 .news-title {
     font-weight: 500;
-    transition: 0.3s ease;
+}
+
+.news-date {
+    font-size: 11px;
+    opacity: 0.6;
 }
 
 .news-link:hover .news-title {
     color: var(--accent);
-}
-
-/* Date */
-.news-date {
-    font-size: 11px;
-    opacity: 0.55;
 }
 
 /* NEW badge */
@@ -633,7 +623,6 @@ section {
     padding: 3px 8px;
     font-size: 10px;
     border-radius: 20px;
-
     background: rgba(107,63,35,0.15);
     color: var(--accent);
 }
