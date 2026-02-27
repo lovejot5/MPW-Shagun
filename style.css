@@ -126,11 +126,10 @@ header {
 
     /* Lighter premium shade */
     background: linear-gradient(
-        180deg,
-        #4a3223 0%,
-        #3b281c 100%
-    );
-
+    180deg,
+    #fbf6f0 0%,
+    #f1e7db 100%
+);
     color: #f3e9df;
 
     box-shadow: 0 8px 30px rgba(0,0,0,0.25);
