@@ -485,6 +485,28 @@ section {
     transform: translateY(-4px);
     box-shadow: 0 12px 25px rgba(0,0,0,0.06);
 }
+/* ================= QUICK LINK CARDS ================= */
+
+.quick-link-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: 0.3s ease;
+}
+
+.quick-link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    border-color: rgba(107,63,35,0.25);
+}
+
+.quick-link-card h3 {
+    transition: 0.3s ease;
+}
+
+.quick-link-card:hover h3 {
+    color: var(--accent);
+}
 
 .gallery-grid {
     display: grid;
