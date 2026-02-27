@@ -100,29 +100,35 @@
             <h2>Send Us a Message</h2>
             <br>
 
-            <form class="contact-form">
+            <form 
+  action="https://formspree.io/f/mqedjyar" 
+  method="POST" 
+  class="contact-form"
+>
 
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" placeholder="Enter your name" required>
-                </div>
+    <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+    </div>
 
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="Enter your email" required>
-                </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" required>
+    </div>
 
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea rows="5" placeholder="Write your message" required></textarea>
-                </div>
+    <div class="form-group">
+        <label>Message</label>
+        <textarea name="message" rows="5" required></textarea>
+    </div>
 
-                <button type="submit" class="btn btn-primary">
-                    Send Message
-                </button>
+    <!-- Optional subject -->
+    <input type="hidden" name="_subject" value="New Contact Form Submission - GPC Bathinda">
 
-            </form>
+    <button type="submit" class="btn btn-primary">
+        Send Message
+    </button>
 
+</form>
         </div>
     </section>
 
