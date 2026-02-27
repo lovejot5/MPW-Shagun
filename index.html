@@ -8,10 +8,7 @@
 </head>
 <body>
 
-<!-- ===== Cursor Glow ===== -->
 <div class="cursor-glow"></div>
-
-<!-- ===== Preloader ===== -->
 <div class="preloader"></div>
 
 <!-- ================= HEADER ================= -->
@@ -45,7 +42,6 @@
 <!-- ================= PAGE CONTENT ================= -->
 <div class="page-content">
 
-    <!-- Floating Parallax Shapes -->
     <div class="shape1"></div>
     <div class="shape2"></div>
 
@@ -88,44 +84,42 @@
     <section class="reveal">
         <div class="container-large">
             <h2>Principal's Message</h2>
-            <br>
 
             <div class="grid-2">
                 <div>
                     <img src="Images/principal.jpg" alt="Principal" style="border-radius:20px;">
                     <br>
                     <strong>Er. Principal Name</strong><br>
-                    <span style="color:#888;">Principal, GPC Bathinda</span>
+                    <span style="color:var(--text-muted);">
+                        Principal, Government Polytechnic College Bathinda
+                    </span>
                 </div>
 
                 <div>
                     <p>
-                        Since its establishment in 1985, Government Polytechnic College,
-                        Bathinda has remained dedicated to shaping technically competent
-                        professionals equipped with both practical skills and ethical values.
+                        Since its establishment in 1985, the college has remained committed
+                        to providing quality technical education that blends theory with
+                        practical application. We strive to develop technically competent,
+                        ethically strong, and socially responsible professionals.
                     </p>
                     <br>
                     <p>
-                        Our institution fosters innovation, discipline, and academic rigor.
-                        We aim to provide students with industry-aligned education,
-                        modern infrastructure, and a vibrant learning environment.
+                        With modern infrastructure, industry-oriented curriculum,
+                        and dedicated faculty members, our institution fosters innovation,
+                        discipline, and excellence in every student.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ================= LATEST NEWS ================= -->
+    <!-- ================= LATEST NEWS (Dynamic) ================= -->
     <section class="reveal">
         <div class="container-large">
             <h2>Latest News</h2>
             <br>
-            <div class="latest-news-container">
-                <ul class="latest-news-list" id="newsList">
-                    <li>Admissions Open 2025 <span class="news-badge">NEW</span></li>
-                    <li>Annual Tech Fest Scheduled for April</li>
-                    <li>Placement Drive Results Announced</li>
-                </ul>
+            <div class="latest-news-container auto-scroll">
+                <ul class="latest-news-list"></ul>
             </div>
         </div>
     </section>
@@ -135,43 +129,49 @@
         <div class="container-large">
             <h2>College Highlights</h2>
             <br>
-
             <div class="grid-3">
                 <div class="card">
                     <h3>22+ Acre Campus</h3>
-                    <p>Modern infrastructure with fully equipped labs and workshops.</p>
+                    <p>Modern infrastructure with advanced labs and workshops.</p>
                 </div>
 
                 <div class="card">
                     <h3>Strong Placement Support</h3>
-                    <p>Industry connections across Punjab and neighboring states.</p>
+                    <p>Industry connections ensuring excellent career opportunities.</p>
                 </div>
 
                 <div class="card">
                     <h3>Government Institution</h3>
-                    <p>Affordable diploma programs with recognized accreditation.</p>
+                    <p>Recognized diploma programs with affordable education.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ================= GALLERY ================= -->
+    <!-- ================= GALLERY SLIDER ================= -->
     <section class="reveal">
         <div class="container-large">
             <h2>Campus Gallery</h2>
             <br>
 
-            <div class="gallery-grid gallery-track">
-                <img src="Images/GPC1.jpg" alt="Campus">
-                <img src="Images/GPC2.jpg" alt="Campus">
-                <img src="Images/GPC3.jpg" alt="Campus">
+            <div class="slider">
+
+                <div class="slides">
+                    <img src="Images/GPC1.jpg" class="slide active" alt="">
+                    <img src="Images/GPC2.jpg" class="slide" alt="">
+                    <img src="Images/GPC3.jpg" class="slide" alt="">
+                </div>
+
+                <button class="slider-btn prev">&#10094;</button>
+                <button class="slider-btn next">&#10095;</button>
+
             </div>
         </div>
     </section>
 
 </div>
 
-<!-- ===== IMAGE MODAL ===== -->
+<!-- ================= IMAGE MODAL ================= -->
 <div id="imageModal">
     <img id="modalImg" src="">
 </div>
@@ -179,18 +179,15 @@
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
 
-    <!-- Top Branding -->
     <div class="footer-top">
-        <img src="Images/logo.jpeg" alt="Government Polytechnic College Logo">
+        <img src="Images/logo.jpeg" alt="College Logo">
         <h3>Government Polytechnic College</h3>
         <p>Bathinda, Punjab</p>
         <div class="footer-divider"></div>
     </div>
 
-    <!-- 4 Column Grid -->
     <div class="footer-grid">
 
-        <!-- Navigation -->
         <div>
             <h4>Navigation</h4>
             <a href="index.html">Home</a>
@@ -200,7 +197,6 @@
             <a href="contact.html">Contact</a>
         </div>
 
-        <!-- Important Links -->
         <div>
             <h4>Important Links</h4>
             <a href="#">Admissions</a>
@@ -209,7 +205,6 @@
             <a href="notices.html">Notices</a>
         </div>
 
-        <!-- Contact -->
         <div class="footer-contact">
             <h4>Contact</h4>
             <p>Bibi Wala Road, Bathinda</p>
@@ -225,7 +220,6 @@
             </p>
         </div>
 
-        <!-- Locate Us (Inside Grid) -->
         <div class="footer-map">
             <h4>Locate Us</h4>
             <iframe
@@ -234,13 +228,16 @@
                 allowfullscreen>
             </iframe>
         </div>
+
     </div>
+
     <div class="footer-bottom">
-    © 2025 Government Polytechnic College, Bathinda. All Rights Reserved.
-    <span class="project-credit">MPW Project by Shagun</span>
-</div>
+        © 2025 Government Polytechnic College, Bathinda. All Rights Reserved.
+        <span class="project-credit">MPW Project by Shagun</span>
+    </div>
+
 </footer>
-<!-- Scroll To Top Button -->
+
 <div class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
     ↑
 </div>
