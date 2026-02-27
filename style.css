@@ -1025,21 +1025,6 @@ box-shadow: 0 10px 25px rgba(139,94,52,0.35);
     position: relative;
 }
 
-/* NEW glowing badge */
-
-.latest-news-list li[data-new="true"]::after {
-    content: " NEW";
-    color: #ff4d4d;
-    font-weight: bold;
-    margin-left: 8px;
-    animation: glow 1.2s infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 5px #ff4d4d; }
-    to { text-shadow: 0 0 15px #ff0000; }
-}
-
 /* ================= COUNTER ================= */
 
 .stat-number {
