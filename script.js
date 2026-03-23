@@ -334,3 +334,41 @@ function initSlider() {
         if (endX - startX > 50) prevSlide();
     });
 }
+
+const form = document.getElementById("contactForm");
+
+if (form) {
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const button = form.querySelector("button");
+        const text = button.querySelector(".btn-text");
+        const spinner = button.querySelector(".spinner");
+
+        text.style.display = "none";
+        spinner.style.display = "inline-block";
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            spinner.style.display = "none";
+            text.style.display = "inline";
+
+            if (response.ok) {
+                alert("Message sent successfully!");
+                form.reset();
+            } else {
+                alert("Something went wrong!");
+            }
+
+        } catch (error) {
+            spinner.style.display = "none";
+            text.style.display = "inline";
+            alert("Error sending message!");
+        }
+    });
+}
